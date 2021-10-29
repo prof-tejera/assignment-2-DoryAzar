@@ -1,16 +1,21 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { AppContext } from '../../../platform/AppProvider';
 import { Fragment } from 'react';
 import './Tabs.css';
 import PropTypes from 'prop-types';
 
-const Tabs = ({...props}) => {
-    const { tabItems = []  } = props;
-    const [tabSelected, setTabSelected] = useState(tabItems? tabItems[0] : "");
+const Tabs = ({ tabItems }) => {
+
+    const {selectedTimer, setSelectedTimer } = useContext(AppContext);
+    
+    // select tab if included in tab list provided, otherwise select first item in tab list
+    const tabSelected  = tabItems.includes(selectedTimer)? selectedTimer : tabItems[0];
+    
+    const setTabSelected = setSelectedTimer;
     
     const handleChange =  (e) => {
         const value = e.target.value || tabSelected;
         setTabSelected(value)
-        if (props.onChange) props.onChange(e.target.value);
     }
 
     return  (

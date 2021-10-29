@@ -1,22 +1,19 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import {  AppContext } from '../../platform/AppProvider';
 import PropTypes from 'prop-types';
 import Card from "./Card/Card";
 import Display from "./Display/Display";
 import Input from "./Input/Input";
 import Button  from "./Button/Button";
 
-const Timer = ({...props}) => {
 
-  const { settings = null } = props;
-  const [timerCounting, setTimerCounting] = useState(false);
-  const [isFrontSide, setFront] =  useState(true);
-  const [statusMessage] = useState(props.statusMessage ||  "");
-  const [counter, setCounter] = useState(props.startTime || "00:00:00");
+const Timer = () => {
+
+  const { settings, startTime, timerCounting, setTimerCounting, setCounter, isFrontSide, setFront } = useContext(AppContext);
 
   // Toggle the counter and hand-off to parent timer
   const toggleCount = (e) => {
       setTimerCounting(!timerCounting);
-      if (props.onChange) props.onChange(e);
   }
 
   // Flips the card to display settings
@@ -33,16 +30,14 @@ const Timer = ({...props}) => {
 
   // Reset the counter
   const reset = (e) => {
-    setCounter(props.startTime || "00:00:00");
+    setCounter(startTime || "00:00:00");
     console.log("reset");
   }
 
   return (
     <>
       <Card side="front">
-        <Display isStarted={timerCounting} 
-                 status = { statusMessage}
-                 value={counter} />
+        <Display  />
 
         <div className="btn_bar">
             {timerCounting &&

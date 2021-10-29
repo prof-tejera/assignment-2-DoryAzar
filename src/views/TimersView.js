@@ -1,5 +1,5 @@
-import {  useState } from 'react';
-
+import {  useContext, useEffect } from 'react';
+import { AppContext } from '../platform/AppProvider';
 import Tabs  from "../components/generic/Tabs/Tabs";
 import Panel from "../components/generic/Panel/Panel";
 
@@ -11,7 +11,7 @@ import * as utils from '../utils/helpers.js';
 
 const TimersView = () => {
   
-  const [selectedTimer, setSelectedTimer] = useState("Stopwatch");
+  const {selectedTimer, setSelectedTimer} = useContext(AppContext);
   
   const timers = [
     { title: "Stopwatch", C: <Stopwatch /> },
@@ -23,6 +23,15 @@ const TimersView = () => {
   const handleChange =  (v) => {
     setSelectedTimer(v);
   }
+
+  // Switching timers
+  useEffect(() => {
+    console.log(`Mount ${selectedTimer}`);
+
+    return () => console.log(`UnMount ${selectedTimer}`);
+
+  }, [selectedTimer]);
+
 
   return (
     <>

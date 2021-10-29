@@ -1,21 +1,23 @@
+import  { useContext } from 'react';
 import './Display.css';
 import PropTypes from 'prop-types';
+import {  AppContext } from '../../../platform/AppProvider';
 
-const Display = ({...props}) => {
-    const {isStarted = false, value = "00:00:00", status = "" } = props;
+const Display = () => {
+    const { timerCounting,  statusMessage, counter } = useContext(AppContext);
 		
     return (
 
         // Return is stylized circular display
         <div className="display_circular">
             <div className="marker">
-                { status && <p className="header">{ status }</p>}
-                <p className="value neonText">{ value }</p>
+                { statusMessage && <p className="header">{ statusMessage }</p>}
+                <p className="value neonText">{ counter }</p>
             </div>
         
             { 
                 // Animate if timer is on
-                !!isStarted && 
+                !!timerCounting && 
                     <>
                         <div className="display_circular_back-1"></div>
                         <div className="display_circular_back-2"></div>
