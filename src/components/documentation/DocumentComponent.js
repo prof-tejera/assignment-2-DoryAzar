@@ -1,4 +1,3 @@
-import { Component } from "react";
 import styled from "styled-components";
 
 
@@ -43,39 +42,37 @@ const RenderComponent = styled.div`
 
 const Documentation = styled.table``;
 
-class DocumentComponent extends Component {
-  render() {
-    return (
-      <Section>
-            <Title>{this.props.title}</Title>
-            <RenderComponent>{this.props.component}</RenderComponent>
-            <Article>
-              <Documentation>
-                <tbody>
-                <tr key={1}>
-                  <th>Prop</th>
-                  <th>Description</th>
-                  <th>Type</th>
-                  <th>Default value</th>
-                </tr>
-                {this.props.propDocs.map((doc, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{doc.prop}</td>
-                      <td>{doc.description}</td>
-                      <td>{doc.type}</td>
-                      <td>
-                        <code>{doc.defaultValue}</code>
-                      </td>
-                    </tr>
-                  );
-                })}
-                </tbody>
-              </Documentation>
-            </Article>
-      </Section>
-    );
-  }
+const DocumentComponent = ({title, component, propDocs}) => {
+  return (
+    <Section>
+          <Title>{title}</Title>
+          <RenderComponent>{component}</RenderComponent>
+          <Article>
+            <Documentation>
+              <tbody>
+              <tr key={1}>
+                <th>Prop</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Default value</th>
+              </tr>
+              {propDocs.map((doc, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{doc.prop}</td>
+                    <td>{doc.description}</td>
+                    <td>{doc.type}</td>
+                    <td>
+                      <code>{doc.defaultValue}</code>
+                    </td>
+                  </tr>
+                );
+              })}
+              </tbody>
+            </Documentation>
+          </Article>
+    </Section>
+  );
 }
 
 export default DocumentComponent;

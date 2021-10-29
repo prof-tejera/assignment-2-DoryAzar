@@ -1,38 +1,27 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import './Input.css';
 import PropTypes from 'prop-types';
 
-class Input extends Component {
+const Input = ({...props}) => {
+    
+    const { label, placeholder, ...inputAttributes } = props;
+    const [value, setValue] = useState(props.value ?? "")
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: props.value?? ""
+    const handleChange = (e) => {
+        setValue(e.target.value);
+        if (props.onChange) props.onChange(e);
+    }
+
+    return (
+        <>
+        {label && 
+            <fieldset>
+                <label className="settings-label" >{label}</label>
+                <input  {...inputAttributes} value={value} placeholder={placeholder} onChange={handleChange} />
+            </fieldset>
         }
-    }
-
-    handleChange = (e) => {
-        this.setState(() => {
-            return {
-                value: e.target.value 
-            };
-        });
-        if (this.props.onChange) this.props.onChange(e);
-    }
-
-    render() {
-        const { label, placeholder, ...inputAttributes } = this.props;
-        return (
-            <>
-            {label && 
-                <fieldset>
-                    <label className="settings-label" >{label}</label>
-                    <input  {...inputAttributes} value={this.state.value} placeholder={placeholder} onChange={this.handleChange} />
-                </fieldset>
-            }
-            </>
-        );
-    }
+        </>
+    );
 
 }
 

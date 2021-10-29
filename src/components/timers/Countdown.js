@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import Timer from "../generic/Timer";
 
 const settings = [
@@ -7,11 +6,8 @@ const settings = [
   {label: "Another setting", placeholder: "TBD"}
 ];
 
-class Countdown extends Component {
-  render() {
-
-    return <Timer statusMessage="Count from 00:30:00"  startTime="00:30:00" settings={settings} />;
-  }
+const Countdown = () => {
+  return <Timer statusMessage="Count from 00:30:00"  startTime="00:30:00" settings={settings} />;
 }
 
 export default Countdown;

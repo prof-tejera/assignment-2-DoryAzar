@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import Timer from "../generic/Timer";
 
 const settings = [
@@ -7,10 +6,8 @@ const settings = [
   {label: "Rounds", value:"2", placeholder: "Stops after that many rounds"}
 ];
 
-class XY extends Component {
-  render() {
-    return <Timer statusMessage="Round 1 of 2" startTime="00:20:10" settings={settings} />;
-  }
+const XY = () => {
+  return <Timer statusMessage="Round 1 of 2" startTime="00:20:10" settings={settings} />;
 }
 
 export default XY;

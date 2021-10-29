@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import Timer from "../generic/Timer";
 
 const settings = [
@@ -6,11 +5,8 @@ const settings = [
   {label: "Stop Time", value: "00:30:00", placeholder: "Stop the timer at this time"}
 ];
 
-class StopWatch extends Component {
-  render() {
-
-    return <Timer statusMessage="Count to 00:30:00" settings={settings} />;
-  }
+const StopWatch = ()  =>  {
+  return <Timer statusMessage="Count to 00:30:00" settings={settings} />;
 }
 
 export default StopWatch;

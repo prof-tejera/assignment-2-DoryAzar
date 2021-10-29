@@ -56,24 +56,23 @@ const DotGroup = styled.div`
   display: flex;
 `;
 
-class Loading extends React.Component {
-  render() {
-    const size = sizeMapping[this.props.size];
-    const { color } = this.props;
+const Loading = ({...props})  =>  {
+  const size = sizeMapping[props.size];
+  const { color } = props;
 
-    return (
-      <Container>
-        <DotGroup>
-          <Dot size={size} color={color} />
-          <Dot size={size} color={color} />
-        </DotGroup>
-        <DotGroup>
-          <Dot size={size} color={color} />
-          <Dot size={size} color={color} />
-        </DotGroup>
-      </Container>
-    );
-  }
+  return (
+    <Container>
+      <DotGroup>
+        <Dot size={size} color={color} />
+        <Dot size={size} color={color} />
+      </DotGroup>
+      <DotGroup>
+        <Dot size={size} color={color} />
+        <Dot size={size} color={color} />
+      </DotGroup>
+    </Container>
+  );
+
 }
 
 Loading.propTypes = {

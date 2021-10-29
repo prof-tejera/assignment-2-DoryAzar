@@ -5,7 +5,7 @@ import DocumentationView from "./views/DocumentationView";
 import TimersView from "./views/TimersView";
 
 
-function App() {
+const App = () => {
   return (
       <Router>
         <nav className="navigation">
