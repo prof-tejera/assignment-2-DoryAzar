@@ -1,35 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useTimer } from '../hooks/useTimer';
+import { T_STOPWATCH } from '../utils/helpers';
 
 export const AppContext = React.createContext({});
 
-const AppProvider = ({ children }) => {
 
-    const [selectedTimer, setSelectedTimer]  = useState("Stopwatch");
-    const [settings, setSettings] = useState();
-    const [startTime, setStartTime] = useState("00:00:00");
-    const [statusMessage, setStatusMessage] = useState("");
-    const [timerCounting, setTimerCounting] =  useState(false);
-    const [counter, setCounter] = useState("00:00:00");
-    const [isFrontSide, setFront ] = useState(true);
-
-    const resetTimer = (defaultSettings, statusMessage, startTime) => {
-        setSettings(defaultSettings);
-        setStatusMessage(statusMessage);
-        setStartTime(startTime);
-    }
-
+export const AppProvider = ({ timer = T_STOPWATCH, children }) => {
+    const { initializeTimer, ...settings }  = useTimer(timer);
 
     return <AppContext.Provider 
-            value={
-                    {   selectedTimer, setSelectedTimer,
-                        settings, setSettings, 
-                        startTime, setStartTime, 
-                        statusMessage, setStatusMessage, 
-                        timerCounting, setTimerCounting,
-                        counter, setCounter,
-                        isFrontSide, setFront,
-                        resetTimer
-                }}>
+            value={{ ...settings}}>
             {children}
         </AppContext.Provider>;
 };

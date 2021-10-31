@@ -11,11 +11,9 @@ const Tabs = ({ tabItems }) => {
     // select tab if included in tab list provided, otherwise select first item in tab list
     const tabSelected  = tabItems.includes(selectedTimer)? selectedTimer : tabItems[0];
     
-    const setTabSelected = setSelectedTimer;
-    
     const handleChange =  (e) => {
         const value = e.target.value || tabSelected;
-        setTabSelected(value)
+        setSelectedTimer(value);
     }
 
     return  (

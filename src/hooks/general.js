@@ -12,19 +12,24 @@ export const useListener = (event, handler) => {
   }, [event, handler]);
 };
 
-
-export const useInterval = (callback, delay) => {
+export const useInterval  = (callback, delay) => {
   const interval = useRef();
-  const savedCallback = useRef(callback);
+  const savedCallback = useRef();
 
   useEffect(() => {
     savedCallback.current = callback;
-  }, [callback]);
+  });
 
   useEffect(() => {
-    interval.current = setInterval(() => savedCallback.current(), delay);
+    if (!delay) {
+      return () => {};
+    }
+
+    interval.current = setInterval(() => { 
+      savedCallback.current && savedCallback.current();
+    }, delay);
     return () => clearInterval(interval.current);
   }, [delay]);
 
   return interval.current;
-};
+}

@@ -20,18 +20,18 @@ const App = () => {
             </ul>
           </nav>
           <br />
-        <AppProvider>
-          <Container>
-            <Switch>
-                <Route path="/docs">
-                  <DocumentationView />
-                </Route>
-                <Route path="/">
-                  <TimersView />
-                </Route>
-              </Switch>
-          </Container>
-        </AppProvider>
+          <AppProvider>
+            <Container>
+              <Switch>
+                  <Route path="/docs">
+                    <DocumentationView />
+                  </Route>
+                  <Route path="/">
+                    <TimersView />
+                  </Route>
+                </Switch>
+            </Container>
+          </AppProvider>
       </Router>
   );
 }

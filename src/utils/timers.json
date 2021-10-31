@@ -1,0 +1,22 @@
+{
+    "Stopwatch" : {
+        "startTime": 0,
+        "stopTime": 10,
+        "counter": 1
+    },
+    "Countdown": {
+        "startTime": 0,
+        "stopTime": 10,
+        "counter": 2
+    },
+    "XY": {
+        "startTime": 0,
+        "stopTime": 10,
+        "counter": 3
+    },
+    "Tabata":{
+        "startTime": 0,
+        "stopTime": 10,
+        "counter": 4
+    }
+}

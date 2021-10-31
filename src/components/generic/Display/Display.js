@@ -1,10 +1,15 @@
-import  { useContext } from 'react';
+import  { useContext, useEffect } from 'react';
 import './Display.css';
 import PropTypes from 'prop-types';
 import {  AppContext } from '../../../platform/AppProvider';
+import * as utils from "../../../utils/helpers";
 
 const Display = () => {
-    const { timerCounting,  statusMessage, counter } = useContext(AppContext);
+    const { counter, timerCounting,  statusMessage, setStatusMessage, messenger} = useContext(AppContext);
+
+    useEffect(() => {
+        setStatusMessage(messenger());
+    }, [setStatusMessage, messenger]);
 		
     return (
 
@@ -12,7 +17,7 @@ const Display = () => {
         <div className="display_circular">
             <div className="marker">
                 { statusMessage && <p className="header">{ statusMessage }</p>}
-                <p className="value neonText">{ counter }</p>
+                <p className="value neonText">{ utils.formatTime(counter) }</p>
             </div>
         
             { 

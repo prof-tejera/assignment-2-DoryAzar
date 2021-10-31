@@ -1,23 +1,34 @@
-import { useContext, useEffect } from 'react';
-import Timer from "../generic/Timer";
+import { useContext, useEffect, useRef } from 'react';
 import {  AppContext } from '../../platform/AppProvider';
+import Timer from "../generic/Timer";
 
-const DEFAULT_SETTINGS = [
-  {label: "Work Time", value: "00:45:00", placeholder: "Start the timer at this time"},
-  {label: "Rest Time", value:"00:10:00", placeholder: "Timer will rest for that duration"},
-  {label: "Rounds", value:"2", placeholder: "Stops after that many rounds"}
+const SETTINGS_FORM = [
+  {id:"startTime", label: "Work Time", value: "00:45:00", placeholder: "Start the timer at this time"},
+  {id:"rest", label: "Rest Time", value:"00:10:00", placeholder: "Timer will rest for that duration"},
+  {id:"rounds", label: "Rounds", value:"2", placeholder: "Stops after that many rounds"}
 ];
 
 const Tabata = ()  => {
-  const { setSettings, setStatusMessage, setStartTime } = useContext(AppContext);
   
-  useEffect(() => {
-    setSettings(DEFAULT_SETTINGS);
-    setStatusMessage("Work - Round 1 of 2");
-    setStartTime("00:45:00");
-  }, [setSettings, setStatusMessage, setStartTime]);
+  const {timerCounting, isOver, resetTimer, startTimer, pauseTimer, completeTimer } = useContext(AppContext);
+  const runningTimer = useRef();
 
-  return <Timer />;
+  useEffect(() => {
+    if (timerCounting && !isOver()) {
+      runningTimer.current = startTimer()
+    } else if (isOver()) {
+      completeTimer();
+    }
+    else if (!isOver()) {
+      pauseTimer(runningTimer.current);
+    }
+    return () => {
+      pauseTimer(runningTimer.current);
+    };
+  }, [timerCounting, resetTimer, startTimer, isOver, pauseTimer, completeTimer]);
+
+
+  return <Timer settings={SETTINGS_FORM} />
   
 }
 

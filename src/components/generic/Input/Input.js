@@ -26,7 +26,7 @@ const Input = ({...props}) => {
 }
 
 Input.propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     value: PropTypes.string,
     placeholder: PropTypes.string,
     onChange: PropTypes.func

@@ -67,8 +67,8 @@
 .display_circular_back-1 {
     box-shadow: 0.4rem 0.4rem 0.8rem var(--bgLight-2), -0.4rem -0.4rem 0.8rem var(--tint);
     background: linear-gradient(to bottom right, var(--bgLight-2) 0%, var(--tint) 100%);
-    -webkit-animation: waves 2s linear 1s infinite;
-            animation: waves 2s linear 1s infinite;
+    -webkit-animation: waves 1s linear 0.5s infinite;
+            animation: waves 1s linear 0.5s infinite;
 }
 
 .display_circular_back-1.paused {
@@ -78,8 +78,8 @@
 
 .display_circular_back-2 {
     box-shadow: 0.4rem 0.4rem 0.8rem var(--bgLight-2), -0.4rem -0.4rem 0.8rem var(--tint);
-    -webkit-animation: waves 2s linear 1s infinite;
-            animation: waves 2s linear 1s infinite;
+    -webkit-animation: waves 1s linear 0.5s infinite;
+            animation: waves 1s linear 0.5s infinite;
 }
 
 .display_circular_back-2.paused {

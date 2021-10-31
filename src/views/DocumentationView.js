@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { useContext, useEffect } from 'react';
-import { AppContext } from '../platform/AppProvider';
 import DocumentComponent from "../components/documentation/DocumentComponent";
 import Display from "../components/generic/Display/Display";
 import Button from "../components/generic/Button/Button";
@@ -15,20 +13,15 @@ const Title = styled.div`
   font-size: 2rem;
 `;
 
+const TIMER_SETTINGS = [{id:"startTime", value: "00:00:00"}];
 
 const Documentation = () => {
-
-  const { resetTimer } = useContext(AppContext);
 
 
   const flip = () => {
     const card = document.querySelector("#testcard");
     if (card) card.classList.toggle('is-flipped');
   }
-
-  useEffect(() => {
-   resetTimer(null, "Status Text", "00:00:00"); 
-  })
 
   return (
     <>
@@ -37,7 +30,7 @@ const Documentation = () => {
 
       <DocumentComponent
         title="Generic Timer"
-        component={<Panel><Timer /></Panel>}
+        component={<Panel><Timer settings={TIMER_SETTINGS} /></Panel>}
         propDocs={[
           {
             prop: "settings",

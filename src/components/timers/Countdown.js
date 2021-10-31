@@ -1,25 +1,34 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import {  AppContext } from '../../platform/AppProvider';
 import Timer from '../../components/generic/Timer';
 
-const DEFAULT_SETTINGS = [
-  {label: "Start Time", value: "00:30:00", placeholder: "Start the timer at this time"},
-  {label: "Stop Time", value:"00:10:00", placeholder: "Stop the timer at this time"},
-  {label: "Another setting", placeholder: "TBD"}
+const SETTINGS_FORM = [
+  {id: "startTime", label: "Start Time", placeholder: "Start the timer at this time"},
+  {id: "stopTime", label: "Stop Time", placeholder: "Stop the timer at this time"},
 ];
 
 const Countdown = () => {
-  const { setSettings, setStatusMessage, setStartTime } = useContext(AppContext);
+
+  const {timerCounting, isOver, resetTimer, startTimer, pauseTimer, completeTimer } = useContext(AppContext);
+  const runningTimer = useRef();
 
   useEffect(() => {
+    if (timerCounting && !isOver()) {
+      runningTimer.current = startTimer()
+    } else if (isOver()) {
+      completeTimer();
+    }
+    else if (!isOver()) {
+      pauseTimer(runningTimer.current);
+    }
+    return () => {
+      pauseTimer(runningTimer.current);
+    };
+  }, [timerCounting, resetTimer, startTimer, isOver, pauseTimer, completeTimer]);
 
-    setSettings(DEFAULT_SETTINGS);
-    setStatusMessage("Count from 00:30:00");
-    setStartTime("00:30:00");
 
-  }, [setSettings, setStatusMessage, setStartTime]);
-
-  return <Timer />;
+  return <Timer settings={SETTINGS_FORM} />
+  
 }
 
 export default Countdown;

@@ -5,34 +5,39 @@ import Card from "./Card/Card";
 import Display from "./Display/Display";
 import Input from "./Input/Input";
 import Button  from "./Button/Button";
+// import * as utils from "../../utils/helpers";
 
+const Timer = ({ settings }) => {
 
-const Timer = () => {
-
-  const { settings, startTime, timerCounting, setTimerCounting, setCounter, isFrontSide, setFront } = useContext(AppContext);
+  const { setDisplayTime, timerCounting, toggleCounting, toggleSide, resetTimer} = useContext(AppContext);
 
   // Toggle the counter and hand-off to parent timer
   const toggleCount = (e) => {
-      setTimerCounting(!timerCounting);
+    toggleCounting();
   }
 
   // Flips the card to display settings
   const flipSide = () => {
-      setFront(!isFrontSide);
+      toggleSide();
       const card = document.querySelector("#timer_panel");
       if (card) card.classList.toggle('is-flipped');
   }
 
   // Save settings
   const saveSettings  = (e) => {
-    console.log(e.target);
+    setDisplayTime(document.querySelector("#startTime")?.value 
+    || document.querySelector("#rest")?.value 
+    || null);
+
+    flipSide();
+    
   }
 
   // Reset the counter
-  const reset = (e) => {
-    setCounter(startTime || "00:00:00");
-    console.log("reset");
+  const reset = () => {
+    resetTimer();
   }
+
 
   return (
     <>
@@ -40,7 +45,7 @@ const Timer = () => {
         <Display  />
 
         <div className="btn_bar">
-            {timerCounting &&
+            {timerCounting  &&
                   <Button 
                       id = "pause_btn"
                       value="pause"
@@ -89,8 +94,8 @@ const Timer = () => {
                       <Input key={index} 
                              label={setting.label} 
                               placeholder={setting.placeholder} 
-                              value={setting.value} 
-                              id={`settings${index}`}
+                              value={setting.value}
+                              id={setting.id}
                       />)
                   }
               </div>
@@ -118,7 +123,7 @@ const Timer = () => {
 Timer.propTypes = {
   settings: PropTypes.array,
   statusMessage: PropTypes.string,
-  startTime: PropTypes.string,
+  displayTime: PropTypes.string,
   onChange: PropTypes.func
 }
 

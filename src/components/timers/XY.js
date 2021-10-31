@@ -1,23 +1,34 @@
-import { useContext, useEffect } from 'react';
-import Timer from "../generic/Timer";
+import { useContext, useEffect, useRef} from 'react';
 import {  AppContext } from '../../platform/AppProvider';
+import Timer from "../generic/Timer";
 
-const DEFAULT_SETTINGS = [
-  {label: "Start Time", value: "00:20:10", placeholder: "Start the timer at this time"},
-  {label: "Stop Time", value:"00:00:00", placeholder: "Stop the timer at this time"},
-  {label: "Rounds", value:"2", placeholder: "Stops after that many rounds"}
+const SETTINGS_FORM = [
+  {id: "startTime", label: "Start Time", value: "00:20:10", placeholder: "Start the timer at this time"},
+  {id: "stopTime", label: "Stop Time", value:"00:00:00", placeholder: "Stop the timer at this time"},
+  {id:"rounds", label: "Rounds", value:"2", placeholder: "Stops after that many rounds"}
 ];
 
 const XY = () => {
-  const { setSettings, setStatusMessage, setStartTime } = useContext(AppContext);
+
+  const {timerCounting, isOver, resetTimer, startTimer, pauseTimer, completeTimer } = useContext(AppContext);
+  const runningTimer = useRef();
 
   useEffect(() => {
-    setSettings(DEFAULT_SETTINGS);
-    setStatusMessage("Round 1 of 2");
-    setStartTime("00:20:10");
-  }, [setSettings, setStatusMessage, setStartTime]);
+    if (timerCounting && !isOver()) {
+      runningTimer.current = startTimer()
+    } else if (isOver()) {
+      completeTimer();
+    }
+    else if (!isOver()) {
+      pauseTimer(runningTimer.current);
+    }
+    return () => {
+      pauseTimer(runningTimer.current);
+    };
+  }, [timerCounting, resetTimer, startTimer, isOver, pauseTimer, completeTimer]);
 
-  return <Timer />;
+
+  return <Timer settings={SETTINGS_FORM} />
 }
 
 export default XY;
