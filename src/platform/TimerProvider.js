@@ -27,7 +27,6 @@ export const TimerProvider = ({ children }) => {
                 setCounter((counter) => counter + 1);
                 break;
             case T_TABATA:
-                console.log(counter);
                 setCounter((counter) => counter - 1);
                 if (counter === 0 && mode === REST_MODE) {
                     resetTimer(false);
@@ -63,7 +62,6 @@ export const TimerProvider = ({ children }) => {
     // Reset the timer
     const resetTimer = (resetMode = true) => {
         setCounter(mode === WORK_MODE? startTime : restStartTime);
-        console.log(mode, counter);
         if (resetMode) {
             setMode(WORK_MODE);
             setCurrentRound(1);
@@ -86,6 +84,7 @@ export const TimerProvider = ({ children }) => {
 
     // Toggle between timer and settings card
     const toggleSide = () => {
+        if (!isFrontSide) resetTimer();
         setIsFrontSide(!isFrontSide);
     }
 
