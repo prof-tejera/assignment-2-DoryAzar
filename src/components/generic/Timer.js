@@ -9,7 +9,7 @@ import Button  from "./Button/Button";
 const Timer = ({ settings }) => {
 
   const { ...context } = useContext(TimerContext);
-  const { resetTimer, timerCounting, toggleCounting, toggleSide, setSettings, getSettings, dispatchSettings} = context;
+  const { resetTimer, timerCounting, toggleCounting, toggleSide, setSettings, getSettings, dispatchSettings, completeTimer} = context;
 
   useEffect(() => {
     dispatchSettings(settings);
@@ -57,7 +57,7 @@ const Timer = ({ settings }) => {
         <Display  />
 
         <div className="btn_bar">
-            {timerCounting  &&
+            {timerCounting &&
                   <Button 
                       id = "pause_btn"
                       value="pause"
@@ -67,6 +67,7 @@ const Timer = ({ settings }) => {
                       iconName="pause"
                   />
             }
+
             {!timerCounting && 
                   <Button 
                       id = "start_btn"
@@ -79,14 +80,27 @@ const Timer = ({ settings }) => {
             
             }
 
-            <Button 
-              id = "reset_btn"
-              value="reset"
+            {timerCounting && 
+              <Button 
+              id = "complete"
+              value="complete"
               classifiers = "primary"
               isIconButton = {true}
-              onClick={reset}
-              iconName="refresh-outline"
+              onClick={completeTimer}
+              iconName="play-forward-outline"
             />
+            
+            }
+            {!timerCounting &&
+              <Button 
+                id = "reset_btn"
+                value="reset"
+                classifiers = "primary"
+                isIconButton = {true}
+                onClick={reset}
+                iconName="refresh-outline"
+              />
+            }
           
             {settings && <Button 
               id = "settings_btn"
