@@ -5,6 +5,7 @@ export const TimerContext = React.createContext({});
 
 export const TimerProvider = ({ children }) => {
 
+    // Fetch content from Settings Provider
     const { ...settingsContext } = useContext(SettingsContext);
     const { 
         selectedTimer,
@@ -19,6 +20,7 @@ export const TimerProvider = ({ children }) => {
     const [currentRound, setCurrentRound] = useState(1);
     const [mode, setMode] = useState(WORK_MODE);
     const [isFrontSide, setIsFrontSide] = useState(true);
+    const [isComplete, setToComplete] = useState(false);
 
     // private function: start the counter
     const startCounting =  () => {
@@ -32,8 +34,8 @@ export const TimerProvider = ({ children }) => {
                     resetTimer(false);
                     setMode(WORK_MODE);
                     setCurrentRound((currentRound) => currentRound + 1);
-                } else if (counter ===  0 && mode === WORK_MODE) {
-                    resetTimer(false)
+                } else if (counter === 0 && mode === WORK_MODE) {
+                    resetTimer(false);
                     setMode(REST_MODE);
                 }
                 break;
@@ -49,9 +51,19 @@ export const TimerProvider = ({ children }) => {
 
     // Start the timer
     const startTimer = () => {
-        return setInterval(() => {
+        setToComplete(false);
+        
+        // counting up
+        if (T_STOPWATCH) 
+            return setInterval(() => {
                 startCounting();
             }, 1000);
+
+        // counting down can be done with timeout
+        else 
+            return setTimeout(() => {
+                startCounting();
+            }, startTime)
     }
 
     // Pause the timer
@@ -62,8 +74,9 @@ export const TimerProvider = ({ children }) => {
     // Reset the timer
     const resetTimer = (resetMode = true) => {
         setCounter(mode === WORK_MODE? startTime : restStartTime);
-        if (resetMode) {
-            setMode(WORK_MODE);
+        if (!!resetMode) {
+            setToComplete(false);
+            setMode(WORK_MODE); 
             setCurrentRound(1);
         }
     }
@@ -75,6 +88,8 @@ export const TimerProvider = ({ children }) => {
         setCounter(stopTime);
         setCurrentRound(totalRounds);
         setMode(WORK_MODE);
+        setToComplete(true);
+        return true;
     }
 
     // Toggle timer on, off
@@ -90,11 +105,12 @@ export const TimerProvider = ({ children }) => {
 
 
     // Check if the timer completed
-    const isOver = () =>  {
+    const isTimerOver = () =>  {
         
         // countdown
-        if (startTime >= stopTime)
-            return  timerCounting && counter <= stopTime && currentRound === totalRounds;
+        if (startTime >= stopTime) 
+            return  timerCounting && counter <= stopTime && currentRound === totalRounds  
+            && (selectedTimer === T_TABATA? mode === REST_MODE : true);
         
         // countup
         else
@@ -109,7 +125,7 @@ export const TimerProvider = ({ children }) => {
 
         if (mode === REST_MODE && (counter === startTime + 1 || counter === startTime - 1)) return "Breathe...";
         if (mode === WORK_MODE && (counter === startTime + 1 || counter === startTime - 1)) return "Let's move that body!";
-        if (counter === stopTime && currentRound === totalRounds)  return "You made it! Again?";
+        if (isComplete)  return "You made it! Again?";  
         if (!timerCounting && counter !== startTime && counter !== stopTime ) return "Let's take a breath...";
         if (duration >= 10 && elapsed < 0.2) return "Almost There!";
         if (duration >=10 && elapsed < 0.4 ) return "Keep moving...You can do it";
@@ -123,10 +139,12 @@ export const TimerProvider = ({ children }) => {
                 currentRound, setCurrentRound,
                 mode, setMode,
                 statusMessage, setStatusMessage, 
-                timerCounting, toggleCounting,
+                timerCounting, toggleCounting, setTimerCounting,
                 counter, setCounter,
                 isFrontSide, toggleSide,
-                isOver, startTimer, pauseTimer, resetTimer, completeTimer, messenger,
+                isComplete, setToComplete,
+                isTimerOver, startTimer, pauseTimer, resetTimer, 
+                completeTimer, messenger, 
                 ...settingsContext
 
             }}>

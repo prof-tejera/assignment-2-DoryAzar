@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { T_STOPWATCH } from '../utils/helpers';
+import { TIMER_SETTINGS, T_STOPWATCH } from '../utils/helpers';
 
 export const SettingsContext = React.createContext({});
 
@@ -25,11 +25,11 @@ export const SettingsProvider = ({ children }) => {
     }
 
 
-    const dispatchSettings  = (settings)  =>  {
-        const inputSettings = getSettings();
+    const dispatchSettings  = (inputSettings)  =>  {
+        const settings = TIMER_SETTINGS.schema[selectedTimer];
         settings.forEach((setting) => {
-          const input = document.querySelector(`#${setting.id}`);
-          if (input) input.value = inputSettings[setting.id];
+            const input = document.querySelector(`#${setting.id}`);
+            if (input) input.value = inputSettings[setting.id];
         });
         return inputSettings;
       }

@@ -1,19 +1,24 @@
-import { useContext, useEffect  } from 'react';
+import { useContext  } from 'react';
 import {  TimerContext } from '../../platform/TimerProvider';
+import { TIMER_SETTINGS } from '../../utils/helpers';
 import PropTypes from 'prop-types';
 import Card from "./Card/Card";
 import Display from "./Display/Display";
 import Input from "./Input/Input";
 import Button  from "./Button/Button";
+import className from 'classnames';
 
-const Timer = ({ settings }) => {
+
+const Timer = () => {
 
   const { ...context } = useContext(TimerContext);
-  const { resetTimer, timerCounting, toggleCounting, toggleSide, setSettings, getSettings, dispatchSettings, completeTimer} = context;
+  const { resetTimer, timerCounting, toggleCounting, toggleSide, completeTimer, selectedTimer, isComplete} = context;
+  const settings = TIMER_SETTINGS.schema[selectedTimer];
 
-  useEffect(() => {
-    dispatchSettings(settings);
-  });
+  const playButtonStyle = [{
+    "primary": true,
+    "disabled": isComplete
+  }];
 
 
   // Flips the card to display settings
@@ -23,24 +28,15 @@ const Timer = ({ settings }) => {
       if (card) card.classList.toggle('is-flipped');
   }
 
-  const handleChange = (e) => {
-    const input = {};
-    const property = e.target.id;
-    const value =  e.target.value;
-    input[property] = value;
-    setSettings(input);
-    console.log(getSettings());
-  }
-
   // Save settings
   const saveSettings  = () => {
-    const inputSettings = {};
-    settings.forEach((setting) => {
-      const input = document.querySelector(`#${setting.id}`)?.value;
-      inputSettings[setting.id] = input;
+    // const inputSettings = {};
+    // settings.forEach((setting) => {
+    //   const input = document.querySelector(`#${setting.id}`)?.value;
+    //   inputSettings[setting.id] = input;
 
-    });
-    setSettings(inputSettings);
+    // });
+    // setSettings(inputSettings);
     flipSide();
     
   }
@@ -61,18 +57,18 @@ const Timer = ({ settings }) => {
                   <Button 
                       id = "pause_btn"
                       value="pause"
-                      classifiers="primary" 
+                      classifiers="primary"
                       isIconButton={true} 
                       onClick={toggleCounting} 
                       iconName="pause"
                   />
             }
 
-            {!timerCounting && 
+            {!timerCounting &&
                   <Button 
                       id = "start_btn"
                       value="start"
-                      classifiers="primary" 
+                      classifiers={className(playButtonStyle)}
                       isIconButton={true} 
                       onClick={toggleCounting} 
                       iconName="play"
@@ -122,7 +118,6 @@ const Timer = ({ settings }) => {
                               placeholder={setting.placeholder} 
                               value={context[setting.id]}
                               id={setting.id}
-                              onChange={handleChange}
                       />)
                   }
               </div>

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Input = ({...props}) => {
 
     const { label, placeholder, ...inputAttributes } = props;
-    const [value, setValue] = useState(props.value ?? "")
+    const [value, setValue] = useState(props.value ?? "");
 
     const handleChange = (e) => {
         setValue(e.target.value);

@@ -1,22 +1,81 @@
-{
-    "Stopwatch" : {
-        "startTime": 0,
-        "stopTime": 10,
-        "counter": 1
+{   "settings": {
+        "Stopwatch" : {
+            "startTime": 1,
+            "stopTime": 3
+        },
+        "Countdown": {
+            "startTime": 5,
+            "stopTime": 2
+        },
+        "XY": {
+            "startTime": 2,
+            "stopTime": 0,
+            "totalRounds": 4
+        },
+        "Tabata":{
+            "startTime": 3,
+            "restStartTime": 4,
+            "totalRounds": 2
+        }
     },
-    "Countdown": {
-        "startTime": 20,
-        "stopTime": 10,
-        "counter": 2
-    },
-    "XY": {
-        "startTime": 2,
-        "stopTime": 10,
-        "counter": 3
-    },
-    "Tabata":{
-        "startTime": 0,
-        "stopTime": 10,
-        "counter": 4
+    "schema": {
+        "Stopwatch" : [
+            {
+                "id": "startTime", 
+                "label": "Start Time", 
+                "placeholder": "Start the timer at this time"
+            },
+            {
+                "id": "stopTime", 
+                "label": "Stop Time", 
+                "placeholder": "Stop the timer at this time"
+            }
+        ],
+        "Countdown": [
+            {
+                "id": "startTime", 
+                "label": "Start Time", 
+                "placeholder": "Start the timer at this time"
+            },
+            {
+                "id": "stopTime", 
+                "label": "Stop Time", 
+                "placeholder": "Stop the timer at this time"
+            }
+        ],
+        "Tabata":  [
+            {
+                "id": "startTime", 
+                "label": "Work duration", 
+                "placeholder": "Work for that long"
+            },
+            {
+                "id": "restStartTime", 
+                "label": "Rest duration", 
+                "placeholder": "Rest for that long"
+            },
+            {
+                "id":"totalRounds", 
+                "label": "Rounds", 
+                "placeholder": "Stops after that many rounds"
+            }
+        ],
+        "XY":[
+            {
+                "id": "startTime", 
+                "label": "Start Time", 
+                "placeholder": "Start the timer at this time"
+            },
+            {
+                "id": "stopTime", 
+                "label": "Stop Time", 
+                "placeholder": "Stop the timer at this time"
+            },
+            {
+                "id":"totalRounds", 
+                "label": "Rounds", 
+                "placeholder": "Stops after that many rounds"
+            }
+          ]
     }
 }

@@ -3,9 +3,14 @@ import './Display.css';
 import PropTypes from 'prop-types';
 import {  TimerContext } from '../../../platform/TimerProvider';
 import * as utils from "../../../utils/helpers";
+import className from 'classnames';
 
 const Display = () => {
-    const { counter, timerCounting,  statusMessage, setStatusMessage, messenger } = useContext(TimerContext);
+    const { counter, timerCounting,  statusMessage, setStatusMessage, messenger, isComplete } = useContext(TimerContext);
+
+    const successStyle = [{
+        "success": isComplete
+    }];
 
     useEffect(() => {
         setStatusMessage(messenger());
@@ -16,8 +21,9 @@ const Display = () => {
         // Return is stylized circular display
         <div className="display_circular">
             <div className="marker">
-                { statusMessage && <p className="header">{ statusMessage }</p>}
-                <p className="value neonText">{ utils.formatTime(counter) }</p>
+                { statusMessage && <p className={className("header", successStyle)}>{ statusMessage }</p>}
+                {!isComplete && <p className={className("value neonText", successStyle)}>{ utils.formatTime(counter) }</p>}
+                {isComplete && <p className={className("value neonText", successStyle)}>Nice!</p>}
             </div>
         
             { 
