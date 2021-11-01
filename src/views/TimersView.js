@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import AppProvider from '../platform/AppProvider';
+import { useContext } from 'react';
+import {  SettingsContext } from '../platform/SettingsProvider';
 import Tabs  from "../components/generic/Tabs/Tabs";
 import Panel from "../components/generic/Panel/Panel";
 
@@ -12,8 +12,8 @@ import { T_STOPWATCH, T_COUNTDOWN, T_XY, T_TABATA } from '../utils/helpers';
 
 const TimersView = () => {
 
-  const [selectedTimer, setSelectedTimer] = useState(T_STOPWATCH);
-  
+  const { selectedTimer, setSelectedTimer } = useContext(SettingsContext);
+
   const timers = [
     { title: T_STOPWATCH, C: <Stopwatch /> },
     { title: T_COUNTDOWN, C: <Countdown /> },
@@ -27,13 +27,13 @@ const TimersView = () => {
   }
 
   return (
-    <AppProvider timer={selectedTimer}>
+    <>
       <Tabs tabItems={utils.readCollection(timers, 'title')} 
             onChange={handleChange} />
       <Panel id="timer_panel">
         {utils.getTimer(selectedTimer, timers)}
       </Panel>
-    </AppProvider>
+    </>
 
   );
   

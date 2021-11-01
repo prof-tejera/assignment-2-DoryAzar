@@ -1,11 +1,11 @@
 import  { useContext, useEffect } from 'react';
 import './Display.css';
 import PropTypes from 'prop-types';
-import {  AppContext } from '../../../platform/AppProvider';
+import {  TimerContext } from '../../../platform/TimerProvider';
 import * as utils from "../../../utils/helpers";
 
 const Display = () => {
-    const { counter, timerCounting,  statusMessage, setStatusMessage, messenger} = useContext(AppContext);
+    const { counter, timerCounting,  statusMessage, setStatusMessage, messenger } = useContext(TimerContext);
 
     useEffect(() => {
         setStatusMessage(messenger());

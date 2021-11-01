@@ -1,20 +1,20 @@
-import { useContext } from 'react';
-import {  AppContext } from '../../platform/AppProvider';
+import { useContext, useEffect  } from 'react';
+import {  TimerContext } from '../../platform/TimerProvider';
 import PropTypes from 'prop-types';
 import Card from "./Card/Card";
 import Display from "./Display/Display";
 import Input from "./Input/Input";
 import Button  from "./Button/Button";
-// import * as utils from "../../utils/helpers";
 
 const Timer = ({ settings }) => {
 
-  const { setDisplayTime, timerCounting, toggleCounting, toggleSide, resetTimer} = useContext(AppContext);
+  const { ...context } = useContext(TimerContext);
+  const { resetTimer, timerCounting, toggleCounting, toggleSide, setSettings, getSettings, dispatchSettings} = context;
 
-  // Toggle the counter and hand-off to parent timer
-  const toggleCount = (e) => {
-    toggleCounting();
-  }
+  useEffect(() => {
+    dispatchSettings(settings);
+  });
+
 
   // Flips the card to display settings
   const flipSide = () => {
@@ -23,12 +23,24 @@ const Timer = ({ settings }) => {
       if (card) card.classList.toggle('is-flipped');
   }
 
-  // Save settings
-  const saveSettings  = (e) => {
-    setDisplayTime(document.querySelector("#startTime")?.value 
-    || document.querySelector("#rest")?.value 
-    || null);
+  const handleChange = (e) => {
+    const input = {};
+    const property = e.target.id;
+    const value =  e.target.value;
+    input[property] = value;
+    setSettings(input);
+    console.log(getSettings());
+  }
 
+  // Save settings
+  const saveSettings  = () => {
+    const inputSettings = {};
+    settings.forEach((setting) => {
+      const input = document.querySelector(`#${setting.id}`)?.value;
+      inputSettings[setting.id] = input;
+
+    });
+    setSettings(inputSettings);
     flipSide();
     
   }
@@ -51,7 +63,7 @@ const Timer = ({ settings }) => {
                       value="pause"
                       classifiers="primary" 
                       isIconButton={true} 
-                      onClick={toggleCount} 
+                      onClick={toggleCounting} 
                       iconName="pause"
                   />
             }
@@ -61,7 +73,7 @@ const Timer = ({ settings }) => {
                       value="start"
                       classifiers="primary" 
                       isIconButton={true} 
-                      onClick={toggleCount} 
+                      onClick={toggleCounting} 
                       iconName="play"
                   />
             
@@ -89,13 +101,14 @@ const Timer = ({ settings }) => {
       <Card side="back">
             <h1>Settings</h1>
             {settings && 
-              <div className="settings-form">
-                  {settings.map((setting, index) =>  
-                      <Input key={index} 
+              <div className="settings-form" id="inputs">
+                  {settings.map((setting, index) => 
+                      <Input key={index}
                              label={setting.label} 
                               placeholder={setting.placeholder} 
-                              value={setting.value}
+                              value={context[setting.id]}
                               id={setting.id}
+                              onChange={handleChange}
                       />)
                   }
               </div>

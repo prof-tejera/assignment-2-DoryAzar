@@ -3,7 +3,7 @@ import './Input.css';
 import PropTypes from 'prop-types';
 
 const Input = ({...props}) => {
-    
+
     const { label, placeholder, ...inputAttributes } = props;
     const [value, setValue] = useState(props.value ?? "")
 
@@ -17,7 +17,7 @@ const Input = ({...props}) => {
         {label && 
             <fieldset>
                 <label className="settings-label" >{label}</label>
-                <input  {...inputAttributes} value={value} placeholder={placeholder} onChange={handleChange} />
+                <input  {...inputAttributes} value={value} placeholder={placeholder} type="number" onChange={handleChange} />
             </fieldset>
         }
         </>
@@ -27,7 +27,7 @@ const Input = ({...props}) => {
 
 Input.propTypes = {
     label: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
     onChange: PropTypes.func
 }

@@ -1,5 +1,6 @@
 import React from "react";
-import AppProvider from './platform/AppProvider';
+import TimerProvider from './platform/TimerProvider';
+import SettingsProvider from "./platform/SettingsProvider";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Container from "./components/generic/Container/Container";
 import DocumentationView from "./views/DocumentationView";
@@ -20,18 +21,20 @@ const App = () => {
             </ul>
           </nav>
           <br />
-          <AppProvider>
-            <Container>
-              <Switch>
-                  <Route path="/docs">
-                    <DocumentationView />
-                  </Route>
-                  <Route path="/">
-                    <TimersView />
-                  </Route>
-                </Switch>
-            </Container>
-          </AppProvider>
+          <SettingsProvider>
+            <TimerProvider>
+              <Container>
+                <Switch>
+                    <Route path="/docs">
+                      <DocumentationView />
+                    </Route>
+                    <Route path="/">
+                      <TimersView />
+                    </Route>
+                  </Switch>
+              </Container>
+            </TimerProvider>
+          </SettingsProvider>
       </Router>
   );
 }

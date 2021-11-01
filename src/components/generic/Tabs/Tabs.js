@@ -1,12 +1,12 @@
 import { useContext } from 'react';
-import { AppContext } from '../../../platform/AppProvider';
+import { TimerContext } from '../../../platform/TimerProvider';
 import { Fragment } from 'react';
 import './Tabs.css';
 import PropTypes from 'prop-types';
 
 const Tabs = ({ tabItems }) => {
 
-    const {selectedTimer, setSelectedTimer } = useContext(AppContext);
+    const {selectedTimer, setSelectedTimer } = useContext(TimerContext);
     
     // select tab if included in tab list provided, otherwise select first item in tab list
     const tabSelected  = tabItems.includes(selectedTimer)? selectedTimer : tabItems[0];

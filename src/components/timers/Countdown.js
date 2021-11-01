@@ -1,6 +1,5 @@
-import { useContext, useEffect, useRef } from 'react';
-import {  AppContext } from '../../platform/AppProvider';
 import Timer from '../../components/generic/Timer';
+import { useTimer } from "../../hooks/useTimer";
 
 const SETTINGS_FORM = [
   {id: "startTime", label: "Start Time", placeholder: "Start the timer at this time"},
@@ -9,23 +8,10 @@ const SETTINGS_FORM = [
 
 const Countdown = () => {
 
-  const {timerCounting, isOver, resetTimer, startTimer, pauseTimer, completeTimer } = useContext(AppContext);
-  const runningTimer = useRef();
-
-  useEffect(() => {
-    if (timerCounting && !isOver()) {
-      runningTimer.current = startTimer()
-    } else if (isOver()) {
-      completeTimer();
-    }
-    else if (!isOver()) {
-      pauseTimer(runningTimer.current);
-    }
-    return () => {
-      pauseTimer(runningTimer.current);
-    };
-  }, [timerCounting, resetTimer, startTimer, isOver, pauseTimer, completeTimer]);
-
+  useTimer({
+    startTime: 10,
+    stopTime: 0,
+  });
 
   return <Timer settings={SETTINGS_FORM} />
   

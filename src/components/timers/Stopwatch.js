@@ -1,33 +1,17 @@
-import { useContext, useEffect, useRef } from 'react';
-import {  AppContext } from '../../platform/AppProvider';
 import Timer from "../generic/Timer";
-// import * as utils from "../../utils/helpers";
+import { useTimer } from "../../hooks/useTimer";
 
 const SETTINGS_FORM = [
-  {id: "startTime", label: "Start Time", value: "00:00:00", placeholder: "Start the timer at this time"},
-  {id: "stopTime", label: "Stop Time", value: "00:30:00", placeholder: "Stop the timer at this time"}
+  {id: "startTime", label: "Start Time", placeholder: "Start the timer at this time"},
+  {id: "stopTime", label: "Stop Time", placeholder: "Stop the timer at this time"},
 ];
 
 const StopWatch = ()  =>  {
 
-  const {timerCounting, isOver, resetTimer, startTimer, pauseTimer, completeTimer } = useContext(AppContext);
-  const runningTimer = useRef();
-
-  useEffect(() => {
-    if (timerCounting && !isOver()) {
-      runningTimer.current = startTimer()
-    } else if (isOver()) {
-      completeTimer();
-    }
-    else if (!isOver()) {
-      pauseTimer(runningTimer.current);
-    }
-    return () => {
-      pauseTimer(runningTimer.current);
-    };
-  }, [timerCounting, resetTimer, startTimer, isOver, pauseTimer, completeTimer]);
-
-
+  useTimer({
+    startTime: 1,
+    stopTime: 3
+  });
   return <Timer settings={SETTINGS_FORM} />
 
 }
