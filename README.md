@@ -1,3 +1,21 @@
+# Assignment 2
+
+## Submission & Inspiration
+
+[Visit Neumorphic Timers](https://prof-tejera.github.io/assignment-2-DoryAzar/)
+
+We decided for this design to revisit a novel and modern approach to Skeumorphism. This new trend - called Neumorphism - started in 2020 and aims to add more depth and more layering to the contemporary flat design.
+
+Here are some of the references that inspired this work:
++ [Neumorphism and CSS](https://css-tricks.com/neumorphism-and-css/)
++ [Neumorphism in CSS with just two variables](https://dev.to/aritik/neumorphism-in-css-with-just-two-variables-2p30)
++ [Neumorphism Tool](https://neumorphism.io)
++ [Neumorphism in user interfaces](https://uxdesign.cc/neumorphism-in-user-interfaces-b47cef3bf3a6)
++ [Neumorphism: why it's all the hype in UI design](https://www.justinmind.com/blog/neumorphism-ui/)
++ [Neumorphism the right way -  A 2020 Design Trend](https://artofofiare.medium.com/neumorphism-the-right-way-a-2020-design-trend-386e6a09040a)
+
+
+
 # Objective
 In this assignment, we will start using the foundation we lay in A1 and make our timers fully functional. Each timer will function as described in A1 and the user flow should be the following:
 
