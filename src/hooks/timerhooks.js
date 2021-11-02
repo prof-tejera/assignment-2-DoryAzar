@@ -18,15 +18,18 @@ export const useTimerStarter = (context) => {
 
 };
 
-// Hook use to initialize timers
+//Hook use to initialize timers
 export const useTimerInitializer = (inputSettings, context) => {
 
   const {setSettings, setCounter, setCurrentRound, mode, selectedTimer, setToComplete, setTimerCounting } = context; 
   const { startTime, stopTime, totalRounds, restStartTime } = inputSettings;
 
+  const setSettingsRef =  useRef(setSettings);
+  setSettingsRef.current = setSettings;
 
   useEffect(() => {
-    setSettings({ startTime, stopTime, totalRounds: totalRounds?? 1, restStartTime: restStartTime?? 0 });
+
+    setSettingsRef.current({ startTime, stopTime, totalRounds: totalRounds?? 1, restStartTime: restStartTime?? 0 });
     setCounter(mode === WORK_MODE? startTime : restStartTime);
 
     //Only reset if it is not TABATA
@@ -35,8 +38,8 @@ export const useTimerInitializer = (inputSettings, context) => {
       setToComplete(false);
       setTimerCounting(false);
     } 
-  }, [setSettings, setCounter, startTime, stopTime, totalRounds, restStartTime, 
+  }, [setCounter, startTime, stopTime, totalRounds, restStartTime, 
       setCurrentRound, mode, selectedTimer, setToComplete, setTimerCounting]);
-
+    
 }
 

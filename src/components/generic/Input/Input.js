@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import './Input.css';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react/cjs/react.development';
 
 const Input = ({...props}) => {
 
     const { label, placeholder, ...inputAttributes } = props;
-    const [value, setValue] = useState(props.value ?? "");
+    const [value, setValue] = useState(props.value);
+
+    useEffect(() => {
+        setValue(props.value);
+    }, [setValue, props.value]);
+    
 
     const handleChange = (e) => {
         setValue(e.target.value);

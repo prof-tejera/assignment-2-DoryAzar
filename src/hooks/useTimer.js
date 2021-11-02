@@ -9,6 +9,8 @@ export const useTimer = () => {
     const { selectedTimer } = context;
 
     useTimerInitializer(TIMER_SETTINGS.settings[selectedTimer], context);
+
     useTimerStarter(context);
+
   
 }

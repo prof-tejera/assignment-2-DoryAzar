@@ -8,12 +8,12 @@ import Input from "./Input/Input";
 import Button  from "./Button/Button";
 import className from 'classnames';
 
-
 const Timer = () => {
 
   const { ...context } = useContext(TimerContext);
-  const { resetTimer, timerCounting, toggleCounting, toggleSide, completeTimer, selectedTimer, isComplete} = context;
+  const { resetTimer, timerCounting, toggleCounting, toggleSide, completeTimer, selectedTimer, isComplete, setSettings } = context;
   const settings = TIMER_SETTINGS.schema[selectedTimer];
+
 
   const playButtonStyle = [{
     "primary": true,
@@ -30,15 +30,14 @@ const Timer = () => {
 
   // Save settings
   const saveSettings  = () => {
-    // const inputSettings = {};
-    // settings.forEach((setting) => {
-    //   const input = document.querySelector(`#${setting.id}`)?.value;
-    //   inputSettings[setting.id] = input;
+    const inputSettings = {};
+    settings.forEach((setting) => {
+      const input = document.querySelector(`#${setting.id}`)?.value;
+      inputSettings[setting.id] = input;
 
-    // });
-    // setSettings(inputSettings);
+    });
+    setSettings(inputSettings);
     flipSide();
-    
   }
 
   // Reset the counter

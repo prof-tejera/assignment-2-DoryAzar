@@ -9,7 +9,6 @@
         },
         "XY": {
             "startTime": 2,
-            "stopTime": 0,
             "totalRounds": 4
         },
         "Tabata":{
@@ -65,11 +64,6 @@
                 "id": "startTime", 
                 "label": "Start Time", 
                 "placeholder": "Start the timer at this time"
-            },
-            {
-                "id": "stopTime", 
-                "label": "Stop Time", 
-                "placeholder": "Stop the timer at this time"
             },
             {
                 "id":"totalRounds", 

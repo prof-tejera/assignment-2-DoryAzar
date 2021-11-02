@@ -127,12 +127,16 @@ export const TimerProvider = ({ children }) => {
         if (mode === WORK_MODE && (counter === startTime + 1 || counter === startTime - 1)) return "Let's move that body!";
         if (isComplete)  return "You made it! Again?";  
         if (!timerCounting && counter !== startTime && counter !== stopTime ) return "Let's take a breath...";
-        if (duration >= 10 && elapsed < 0.2) return "Almost There!";
-        if (duration >=10 && elapsed < 0.4 ) return "Keep moving...You can do it";
+        if (startTime > stopTime && duration >= 10 && elapsed < 0.2 ) return "Almost There...";
+        if (startTime > stopTime && duration >=10 && elapsed < 0.4 ) return "You can do it!";
+        if (startTime < stopTime && duration >= 10 && elapsed > 0.9 ) return "Your goal is near...";
+        if (startTime < stopTime && duration >= 10 && elapsed > 0.6 ) return "Keep moving";
         if (selectedTimer === T_XY) return `Round ${currentRound} of ${totalRounds}`;
         if ([T_STOPWATCH, T_COUNTDOWN].includes(selectedTimer)) return `Counting to ${formatTime(stopTime)}`;
         if (selectedTimer === T_TABATA) return `${mode} -  Round ${currentRound} of ${totalRounds}`;
     }
+
+    const getCounter = () => {return counter;}
 
     return <TimerContext.Provider 
             value={{ 
@@ -140,7 +144,7 @@ export const TimerProvider = ({ children }) => {
                 mode, setMode,
                 statusMessage, setStatusMessage, 
                 timerCounting, toggleCounting, setTimerCounting,
-                counter, setCounter,
+                counter, setCounter, getCounter,
                 isFrontSide, toggleSide,
                 isComplete, setToComplete,
                 isTimerOver, startTimer, pauseTimer, resetTimer, 
