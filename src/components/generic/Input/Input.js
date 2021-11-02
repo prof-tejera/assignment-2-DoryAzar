@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Input.css';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react/cjs/react.development';
 
 const Input = ({...props}) => {
 
