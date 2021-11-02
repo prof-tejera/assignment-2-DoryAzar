@@ -15,6 +15,7 @@ const Timer = () => {
   const settings = TIMER_SETTINGS.schema[selectedTimer];
 
 
+  // play button style
   const playButtonStyle = [{
     "primary": true,
     "disabled": isComplete
@@ -28,7 +29,7 @@ const Timer = () => {
       if (card) card.classList.toggle('is-flipped');
   }
 
-  // Save settings
+  // Save settings  to context
   const saveSettings  = () => {
     const inputSettings = {};
     settings.forEach((setting) => {
@@ -36,15 +37,10 @@ const Timer = () => {
       inputSettings[setting.id] = input;
 
     });
+    // save the settings to the context
     setSettings(inputSettings);
     flipSide();
   }
-
-  // Reset the counter
-  const reset = () => {
-    resetTimer();
-  }
-
 
   return (
     <>
@@ -92,7 +88,7 @@ const Timer = () => {
                 value="reset"
                 classifiers = "primary"
                 isIconButton = {true}
-                onClick={reset}
+                onClick={resetTimer}
                 iconName="refresh-outline"
               />
             }
@@ -112,8 +108,9 @@ const Timer = () => {
             {settings && 
               <div className="settings-form" id="inputs">
                   {settings.map((setting, index) => 
-                      <Input key={index}
-                             label={setting.label} 
+                      <Input  key={index}
+                              label={setting.label} 
+                              type="number" 
                               placeholder={setting.placeholder} 
                               value={context[setting.id]}
                               id={setting.id}

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const Tabs = ({ tabItems }) => {
 
-    const {selectedTimer, setSelectedTimer } = useContext(TimerContext);
+    const {selectedTimer, setSelectedTimer, setTimerCounting } = useContext(TimerContext);
     
     // select tab if included in tab list provided, otherwise select first item in tab list
     const tabSelected  = tabItems.includes(selectedTimer)? selectedTimer : tabItems[0];
@@ -14,6 +14,7 @@ const Tabs = ({ tabItems }) => {
     const handleChange =  (e) => {
         const value = e.target.value || tabSelected;
         setSelectedTimer(value);
+        setTimerCounting(false);
     }
 
     return  (

@@ -12,7 +12,7 @@ export const TimerProvider = ({ children }) => {
         startTime,
         stopTime,
         restStartTime,
-        totalRounds } = settingsContext;
+        totalRounds, setSettings } = settingsContext;
 
     const [statusMessage, setStatusMessage] = useState("");
     const [timerCounting, setTimerCounting] =  useState(false);
@@ -31,8 +31,8 @@ export const TimerProvider = ({ children }) => {
             case T_TABATA:
                 setCounter((counter) => counter - 1);
                 if (counter === 0 && mode === REST_MODE) {
-                    resetTimer(false);
                     setMode(WORK_MODE);
+                    resetTimer(false);
                     setCurrentRound((currentRound) => currentRound + 1);
                 } else if (counter === 0 && mode === WORK_MODE) {
                     resetTimer(false);
@@ -71,12 +71,29 @@ export const TimerProvider = ({ children }) => {
         clearInterval(interval);
     }
 
-    // Reset the timer
+    // Reset the timer: keeps the timer runner
+    // but reinitializes the counter
     const resetTimer = (resetMode = true) => {
+        
         setCounter(mode === WORK_MODE? startTime : restStartTime);
+
         if (!!resetMode) {
-            setToComplete(false);
             setMode(WORK_MODE); 
+            setToComplete(false);
+            setTimerCounting(false);
+            setCurrentRound(1);
+        }
+    }
+
+    const initializeTimer = (settings) => {
+
+        setSettings(settings);
+        setCounter(mode === WORK_MODE? startTime : restStartTime);
+        if (selectedTimer !== T_TABATA) {
+            setCounter(mode === WORK_MODE? startTime : restStartTime);
+            setMode(WORK_MODE); 
+            setToComplete(false);
+            setTimerCounting(false);
             setCurrentRound(1);
         }
     }
@@ -147,7 +164,7 @@ export const TimerProvider = ({ children }) => {
                 counter, setCounter, getCounter,
                 isFrontSide, toggleSide,
                 isComplete, setToComplete,
-                isTimerOver, startTimer, pauseTimer, resetTimer, 
+                isTimerOver, startTimer, pauseTimer, resetTimer, initializeTimer,
                 completeTimer, messenger, 
                 ...settingsContext
 

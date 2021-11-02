@@ -13,7 +13,6 @@ const Title = styled.div`
   font-size: 2rem;
 `;
 
-const TIMER_SETTINGS = [{id:"startTime", value: "00:00:00"}];
 
 const Documentation = () => {
 
@@ -30,7 +29,7 @@ const Documentation = () => {
 
       <DocumentComponent
         title="Generic Timer"
-        component={<Panel><Timer settings={TIMER_SETTINGS} /></Panel>}
+        component={<Panel><Timer /></Panel>}
         propDocs={[
           {
             prop: "settings",
@@ -62,7 +61,7 @@ const Documentation = () => {
 
       <DocumentComponent
         title="Circular Display "
-        component={<Display isStarted={true} status="Status Text" value="00:10:00" />}
+        component={<Display />}
         propDocs={[
           {
             prop: "isStarted",
@@ -192,7 +191,7 @@ const Documentation = () => {
 
       <DocumentComponent
         title="Input "
-        component={<Input label="Test Label" />}
+        component={<Input label="Test Label" value="" />}
         propDocs={[
           {
             prop: "label",

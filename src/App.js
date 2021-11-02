@@ -8,21 +8,22 @@ import TimersView from "./views/TimersView";
 
 
 const App = () => {
+
   return (
       <Router>
-        <nav className="navigation">
-            <ul>
-              <li key={1}>
-                <Link to="/">Timers</Link>
-              </li>
-              <li key={2}>
-                <Link to="/docs">Documentation</Link>
-              </li>
-            </ul>
-          </nav>
-          <br />
-          <SettingsProvider>
+        <SettingsProvider>
             <TimerProvider>
+            <nav className="navigation">
+                <ul>
+                  <li key={1}>
+                    <Link to="/">Timers</Link>
+                  </li>
+                  <li key={2}>
+                    <Link to="/docs">Documentation</Link>
+                  </li>
+                </ul>
+              </nav>
+              <br />
               <Container>
                 <Switch>
                     <Route path="/docs">
@@ -33,10 +34,11 @@ const App = () => {
                     </Route>
                   </Switch>
               </Container>
-            </TimerProvider>
+              </TimerProvider>
           </SettingsProvider>
       </Router>
   );
 }
 
 export default App;
+

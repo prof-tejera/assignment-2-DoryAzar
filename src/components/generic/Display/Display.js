@@ -6,7 +6,8 @@ import * as utils from "../../../utils/helpers";
 import className from 'classnames';
 
 const Display = () => {
-    const { counter, timerCounting,  statusMessage, setStatusMessage, messenger, isComplete, setCounter, startTime } = useContext(TimerContext);
+    const { counter, timerCounting,  statusMessage, setStatusMessage, 
+        messenger, isComplete, setCounter, startTime } = useContext(TimerContext);
 
     const successStyle = [{
         "success": isComplete

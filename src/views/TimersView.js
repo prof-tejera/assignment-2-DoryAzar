@@ -1,8 +1,7 @@
 import { useContext } from 'react';
-import {  SettingsContext } from '../platform/SettingsProvider';
+import { TimerContext } from '../platform/TimerProvider';
 import Tabs  from "../components/generic/Tabs/Tabs";
 import Panel from "../components/generic/Panel/Panel";
-
 import Stopwatch from "../components/timers/Stopwatch";
 import Countdown from "../components/timers/Countdown";
 import XY from "../components/timers/XY";
@@ -12,7 +11,7 @@ import { T_STOPWATCH, T_COUNTDOWN, T_XY, T_TABATA } from '../utils/helpers';
 
 const TimersView = () => {
 
-  const { selectedTimer, setSelectedTimer } = useContext(SettingsContext);
+  const { selectedTimer, setSelectedTimer } = useContext(TimerContext);
 
   const timers = [
     { title: T_STOPWATCH, C: <Stopwatch /> },

@@ -7,6 +7,8 @@ const Input = ({...props}) => {
     const { label, placeholder, ...inputAttributes } = props;
     const [value, setValue] = useState(props.value);
 
+
+    // Update the context with the new prop value
     useEffect(() => {
         setValue(props.value);
     }, [setValue, props.value]);
@@ -22,7 +24,7 @@ const Input = ({...props}) => {
         {label && 
             <fieldset>
                 <label className="settings-label" >{label}</label>
-                <input  {...inputAttributes} value={value} placeholder={placeholder} type="number" onChange={handleChange} />
+                <input  {...inputAttributes} value={value} placeholder={placeholder} onChange={handleChange} />
             </fieldset>
         }
         </>
