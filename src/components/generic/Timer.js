@@ -8,12 +8,13 @@ import Input from "./Input/Input";
 import Button  from "./Button/Button";
 import className from 'classnames';
 
+const CONFIG = TIMER_SETTINGS.configurations;
+
 const Timer = () => {
 
   const { ...context } = useContext(TimerContext);
   const { resetTimer, timerCounting, toggleCounting, toggleSide, completeTimer, selectedTimer, isComplete, setSettings } = context;
   const settings = TIMER_SETTINGS.schema[selectedTimer];
-
 
   // play button style
   const playButtonStyle = [{
@@ -34,7 +35,7 @@ const Timer = () => {
     const inputSettings = {};
     settings.forEach((setting) => {
       const input = document.querySelector(`#${setting.id}`)?.value;
-      inputSettings[setting.id] = input;
+      inputSettings[setting.id] = parseInt(input) || 0;
 
     });
     // save the settings to the context
@@ -110,11 +111,12 @@ const Timer = () => {
                   {settings.map((setting, index) => 
                       <Input  key={index}
                               label={setting.label} 
-                              type="number" 
-                              placeholder={setting.placeholder} 
+                              type="number"
+                              placeholder={`Between ${CONFIG[setting.type]?.min} and ${CONFIG[setting.type]?.max}`} 
                               value={context[setting.id]}
                               id={setting.id}
-                      />)
+                      />
+                      )
                   }
               </div>
               }

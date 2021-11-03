@@ -34,7 +34,7 @@ const Input = ({...props}) => {
 
 Input.propTypes = {
     label: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date)]),
     placeholder: PropTypes.string,
     onChange: PropTypes.func
 }
