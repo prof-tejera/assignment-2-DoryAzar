@@ -55,6 +55,7 @@ export const TimerProvider = ({ children }) => {
 
     // Start the timer
     const startTimer = () => {
+        console.log(counter);
         setToComplete(false);
         
         // counting up
@@ -93,7 +94,6 @@ export const TimerProvider = ({ children }) => {
 
     // Initializes the timer
     const initializeTimer = (settings) => {
-
         setSettings(settings);
         setCounter(mode === WORK_MODE? startTime : restStartTime);
         if (selectedTimer !== T_TABATA) {

@@ -14,10 +14,10 @@ const TimersView = () => {
   const { selectedTimer, setSelectedTimer } = useContext(TimerContext);
 
   const timers = [
-    { title: T_STOPWATCH, C: <Stopwatch /> },
-    { title: T_COUNTDOWN, C: <Countdown /> },
+    { title: T_STOPWATCH, C: <Stopwatch   /> },
+    { title: T_COUNTDOWN, C: <Countdown  /> },
     { title: T_XY, C: <XY /> },
-    { title: T_TABATA, C: <Tabata /> },
+    { title: T_TABATA, C: <Tabata  /> },
   ];
 
 

@@ -12,7 +12,7 @@ const Countdown = () => {
   useTimer();
 
   // Render the generic timer
-  return <Timer  />
+  return <Timer />
   
 }
 

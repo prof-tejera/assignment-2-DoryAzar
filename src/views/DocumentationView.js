@@ -185,7 +185,7 @@ const Documentation = () => {
           {
             prop: "value",
             description: "Initial value passed to the input",
-            type: "String",
+            type: "String, Number or Date",
             defaultValue: "Registered in context. Optional. Default: None",
           },
           {
