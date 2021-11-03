@@ -20,10 +20,10 @@ export const SettingsProvider = ({ children }) => {
     }
 
     const setSettings = (settings) =>  {
-        setStartTime(settings.startTime? parseInt(settings.startTime): startTime);
+        setStartTime(settings.startTime? parseInt(settings.startTime): 0);
         setStopTime(settings.stopTime? parseInt(settings.stopTime): 0);
         setTotalRounds(settings.totalRounds? parseInt(settings.totalRounds):  1);
-        setRestStartTime(settings.restStartTime? parseInt(settings.restStartTime): startTime);
+        setRestStartTime(settings.restStartTime? parseInt(settings.restStartTime): 0);
         //return settings;
     }
 

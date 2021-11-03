@@ -22,6 +22,8 @@ export const TimerProvider = ({ children }) => {
     const [isFrontSide, setIsFrontSide] = useState(true);
     const [isComplete, setToComplete] = useState(false);
 
+    const [restRound, setRestRound] = useState(1);
+
     // private function: start the counter
     const startCounting =  () => {
         switch(selectedTimer) {
@@ -32,14 +34,16 @@ export const TimerProvider = ({ children }) => {
                 setCounter((counter) => counter - 1);
                 if (counter === 0 && mode === REST_MODE) {
                     setMode(WORK_MODE);
-                    resetTimer(false);
-                    setCurrentRound((currentRound) => currentRound + 1);
+                    setCounter(startTime);
+                    setCurrentRound(currentRound + 1);
                 } else if (counter === 0 && mode === WORK_MODE) {
-                    resetTimer(false);
                     setMode(REST_MODE);
+                    setCounter(restStartTime);
+                    setRestRound(restRound + 1);
                 }
                 break;
             default:
+                // /CountDown and XY have the same principles
                 setCounter((counter) => counter - 1);
                 if (counter === 0) {
                     resetTimer(false);
@@ -82,9 +86,12 @@ export const TimerProvider = ({ children }) => {
             setToComplete(false);
             setTimerCounting(false);
             setCurrentRound(1);
+            setRestRound(0);
         }
     }
 
+
+    // Initializes the timer
     const initializeTimer = (settings) => {
 
         setSettings(settings);
@@ -95,6 +102,7 @@ export const TimerProvider = ({ children }) => {
             setToComplete(false);
             setTimerCounting(false);
             setCurrentRound(1);
+            setRestRound(0);
         }
     }
 
@@ -104,6 +112,7 @@ export const TimerProvider = ({ children }) => {
         toggleCounting();
         setCounter(stopTime);
         setCurrentRound(totalRounds);
+        setRestRound(totalRounds);
         setMode(WORK_MODE);
         setToComplete(true);
         return true;
@@ -127,7 +136,7 @@ export const TimerProvider = ({ children }) => {
         // countdown
         if (startTime >= stopTime) 
             return  timerCounting && counter <= stopTime && currentRound === totalRounds  
-            && (selectedTimer === T_TABATA? mode === REST_MODE : true);
+            && (selectedTimer === T_TABATA? restRound === totalRounds : true);
         
         // countup
         else
@@ -143,17 +152,24 @@ export const TimerProvider = ({ children }) => {
         if (mode === REST_MODE && (counter === startTime + 1 || counter === startTime - 1)) return "Breathe...";
         if (mode === WORK_MODE && (counter === startTime + 1 || counter === startTime - 1)) return "Let's move that body!";
         if (isComplete)  return "You made it! Again?";  
+
+        // Breathing messages
         if (!timerCounting && counter !== startTime && counter !== stopTime ) return "Let's take a breath...";
+        if (mode === REST_MODE && duration >= 10 && elapsed < 0.2) return  "We're about to start again";
+        if (mode === REST_MODE && duration >=10 && elapsed < 0.4 ) return  "Take a deep breath";
+
+
+        // Goal reaching messages
         if (startTime > stopTime && duration >= 10 && elapsed < 0.2 ) return "Almost There...";
         if (startTime > stopTime && duration >=10 && elapsed < 0.4 ) return "You can do it!";
         if (startTime < stopTime && duration >= 10 && elapsed > 0.9 ) return "Your goal is near...";
         if (startTime < stopTime && duration >= 10 && elapsed > 0.6 ) return "Keep moving";
+
+        // Main messages
         if (selectedTimer === T_XY) return `Round ${currentRound} of ${totalRounds}`;
         if ([T_STOPWATCH, T_COUNTDOWN].includes(selectedTimer)) return `Counting to ${formatTime(stopTime)}`;
         if (selectedTimer === T_TABATA) return `${mode} -  Round ${currentRound} of ${totalRounds}`;
     }
-
-    const getCounter = () => {return counter;}
 
     return <TimerContext.Provider 
             value={{ 
@@ -161,7 +177,7 @@ export const TimerProvider = ({ children }) => {
                 mode, setMode,
                 statusMessage, setStatusMessage, 
                 timerCounting, toggleCounting, setTimerCounting,
-                counter, setCounter, getCounter,
+                counter, setCounter,
                 isFrontSide, toggleSide,
                 isComplete, setToComplete,
                 isTimerOver, startTimer, pauseTimer, resetTimer, initializeTimer,

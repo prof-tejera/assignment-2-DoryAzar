@@ -1,20 +1,20 @@
 {   "settings": {
         "Stopwatch" : {
-            "startTime": 1,
-            "stopTime": 3
+            "startTime": 0,
+            "stopTime": 12
         },
         "Countdown": {
-            "startTime": 5,
-            "stopTime": 2
+            "startTime": 10,
+            "stopTime": 0
         },
         "XY": {
-            "startTime": 2,
-            "totalRounds": 4
+            "startTime": 10,
+            "totalRounds": 3
         },
         "Tabata":{
-            "startTime": 3,
-            "restStartTime": 4,
-            "totalRounds": 2
+            "startTime": 10,
+            "restStartTime": 5,
+            "totalRounds": 5
         }
     },
     "schema": {
