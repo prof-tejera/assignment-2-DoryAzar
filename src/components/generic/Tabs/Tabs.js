@@ -43,8 +43,7 @@ const Tabs = ({ tabItems }) => {
 
 
 Tabs.propTypes = {
-    tabItems: PropTypes.arrayOf(PropTypes.string),
-    onChange: PropTypes.func
+    tabItems: PropTypes.arrayOf(PropTypes.string)
 }
 
 export default Tabs;

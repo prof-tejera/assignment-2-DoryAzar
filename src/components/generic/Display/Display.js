@@ -46,9 +46,9 @@ const Display = () => {
 
 
 Display.propTypes = {
-	isStarted: PropTypes.bool,
-    value: PropTypes.string,
-    status: PropTypes.string
+	timerCounting: PropTypes.bool,
+    statusMessage: PropTypes.string,
+    counter: PropTypes.string
 }
 
 

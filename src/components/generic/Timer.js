@@ -141,10 +141,7 @@ const Timer = () => {
 }
 
 Timer.propTypes = {
-  settings: PropTypes.array,
-  statusMessage: PropTypes.string,
-  displayTime: PropTypes.string,
-  onChange: PropTypes.func
+  settings: PropTypes.object,
 }
 
 export default Timer;

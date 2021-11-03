@@ -7,6 +7,7 @@ import Tabs from "../components/generic/Tabs/Tabs";
 import Card from "../components/generic/Card/Card";
 import Panel from "../components/generic/Panel/Panel";
 import Timer from "../components/generic/Timer";
+import { T_STOPWATCH, T_COUNTDOWN, T_XY, T_TABATA } from "../utils/helpers";
 
 
 const Title = styled.div`
@@ -34,26 +35,8 @@ const Documentation = () => {
           {
             prop: "settings",
             description: "Collection that defines the allowed settings for a timer",
-            type: "array of objects - [{label: 'label1', value: 'value1', placeholder: 'placeholder1'}, {...}]",
-            defaultValue: "Optional. Default: []",
-          },
-          {
-            prop: "statusMessage",
-            description: "Status message that can be used for rounds/rest",
-            type: "string",
-            defaultValue: "Optional. Default: None",
-          },
-          {
-            prop: "startTime",
-            description: "Starting time for the timer",
-            type: "string",
-            defaultValue: "Optional. Default: 00:00:00",
-          },
-          {
-            prop: "onChange",
-            description: "Event handler for capturing values input on change",
-            type: "function",
-            defaultValue: "Optional. Default: None",
+            type: "JSON - [{label: 'label1', value: 'value1', placeholder: 'placeholder1'}, {...}]",
+            defaultValue: "Optional. Default: <timer.json> in utils",
           }
 
         ]}
@@ -64,22 +47,22 @@ const Documentation = () => {
         component={<Display />}
         propDocs={[
           {
-            prop: "isStarted",
+            prop: "timerCounting",
             description: "Animates the circular display",
             type: "bool",
-            defaultValue: "Optional. Default: false",
+            defaultValue: "Registered in context. Optional. Default: false ",
           },
           {
-            prop: "status",
-            description: "Status message that can be used for rounds/rest",
-            type: "string",
-            defaultValue: "Optional. Default: None",
-          },
-          {
-            prop: "value",
+            prop: "counter",
             description: "Value to be displayed",
             type: "string",
-            defaultValue: "Optional. Default: 00:00:00",
+            defaultValue: "Registered in context. Optional. Default: 00:00:00",
+          },
+          {
+            prop: "statusMessage",
+            description: "Status message that can be used for rounds/rest",
+            type: "string",
+            defaultValue: "Registered in context. Optional. Default: None",
           }
         ]}
       />    
@@ -197,13 +180,13 @@ const Documentation = () => {
             prop: "label",
             description: "Label of the input field",
             type: "String",
-            defaultValue: "Required. Default: None",
+            defaultValue: "Optional. Default: None",
           },
           {
             prop: "value",
             description: "Initial value passed to the input",
             type: "String",
-            defaultValue: "Optional. Default: None",
+            defaultValue: "Registered in context. Optional. Default: None",
           },
           {
             prop: "placeholder",
@@ -216,6 +199,10 @@ const Documentation = () => {
             description: "Event handler for capturing keyboard inputs",
             type:  "function",
             defaultValue:  "Optional. Default: None"
+          },
+          {
+            prop: "Other",
+            description: "All other HTML input attributes are supported"
           }
 
 
@@ -224,7 +211,7 @@ const Documentation = () => {
 
       <DocumentComponent
         title="Tabs "
-        component={<Tabs tabItems={["Tab 1", "Tab 2", "Tab 3", "Tab 4"]} />}
+        component={<Tabs tabItems={[T_STOPWATCH, T_COUNTDOWN, T_XY, T_TABATA]} />}
         propDocs={[
           {
             prop: "tabItems",
@@ -233,10 +220,10 @@ const Documentation = () => {
             defaultValue: "Optional. Default: []",
           },
           {
-            prop: "onChange",
-            description: "Event handler for capturing the selected tab",
-            type: "function",
-            defaultValue: "Optional. Default: None",
+            prop: "selectedTimer",
+            description: "Selected tab is registered in context",
+            type: "string",
+            defaultValue: "Registered in context. Optional. Default: None",
           }
         ]}
       />    
