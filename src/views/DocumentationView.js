@@ -6,7 +6,6 @@ import Input from "../components/generic/Input/Input";
 import Tabs from "../components/generic/Tabs/Tabs";
 import Card from "../components/generic/Card/Card";
 import Panel from "../components/generic/Panel/Panel";
-import Timer from "../components/generic/Timer";
 import { T_STOPWATCH, T_COUNTDOWN, T_XY, T_TABATA } from "../utils/helpers";
 
 
@@ -26,21 +25,6 @@ const Documentation = () => {
   return (
     <>
       <Title>Documentation</Title>
-
-
-      <DocumentComponent
-        title="Generic Timer"
-        component={<Panel><Timer /></Panel>}
-        propDocs={[
-          {
-            prop: "settings",
-            description: "Collection that defines the allowed settings for a timer",
-            type: "JSON - [{label: 'label1', value: 'value1', placeholder: 'placeholder1'}, {...}]",
-            defaultValue: "Optional. Default: <timer.json> in utils",
-          }
-
-        ]}
-      />   
 
       <DocumentComponent
         title="Circular Display "

@@ -17,6 +17,21 @@
             "totalRounds": 5
         }
     },
+    "configurations": {
+        "persistence": true,
+        "time": {
+            "min": 0,
+            "max": 86400
+        },
+        "duration": {
+            "min": 0,
+            "max": 86400
+        },
+        "rounds": {
+            "min": 1,
+            "max": 10
+        }
+    },
     "schema": {
         "Stopwatch" : [
             {
@@ -80,20 +95,5 @@
                 "type": "rounds"
             }
           ]
-    },
-
-    "configurations": {
-        "time": {
-            "min": 0,
-            "max": 86400
-        },
-        "duration": {
-            "min": 0,
-            "max": 86400
-        },
-        "rounds": {
-            "min": 1,
-            "max": 10
-        }
     }
 }

@@ -23,14 +23,19 @@ export const SettingsProvider = ({ children }) => {
 
     // Setter that sets all the settings in one call
     const setSettings = (settings) =>  {
+        if (isPersistent()) localStorage.setItem(selectedTimer, JSON.stringify(settings));
         setStartTime(settings.startTime && isValid(settings.startTime)? parseInt(settings.startTime): 0);
         setStopTime(settings.stopTime && isValid(settings.stopTime)? parseInt(settings.stopTime): 0);
         setTotalRounds(settings.totalRounds && isValid(settings.totalRounds, "rounds")? parseInt(settings.totalRounds):  1);
         setRestStartTime(settings.restStartTime && isValid(settings.restStartTime) ? parseInt(settings.restStartTime): 0);
     }
 
+    // Checks if input is valid based on expected configurations in timer.json
     const isValid =  (value, mode = "time") =>  value && !isNaN(value) && value <= TIMER_SETTINGS.configurations[mode].max && value >= TIMER_SETTINGS.configurations[mode].min;
- 
+    
+    // Checks if persistence is turned on in the configurations
+    const isPersistent = () => TIMER_SETTINGS.configurations.persistence;
+
     return <SettingsContext.Provider 
             value={{ 
                 selectedTimer, setSelectedTimer,
@@ -38,7 +43,7 @@ export const SettingsProvider = ({ children }) => {
                 stopTime, setStopTime,
                 totalRounds, setTotalRounds,
                 restStartTime, setRestStartTime,
-                getSettings, setSettings
+                getSettings, setSettings, isPersistent
             }}>
             {children}
         </SettingsContext.Provider>;

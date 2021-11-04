@@ -20,13 +20,13 @@ export const useTimerStarter = (context) => {
 //Hook use to initialize timers
 export const useTimerInitializer = (inputSettings, context) => {
 
-  const {setSettings, initializeTimer } = context; 
+  const {setSettings, exitTimer } = context; 
 
   const setInitialSettings = useRef();
   setInitialSettings.current = setSettings;
 
-  const initialize =  useRef();
-  initialize.current = initializeTimer;
+  const exit =  useRef();
+  exit.current = exitTimer;
 
   useEffect(() => {
     
@@ -34,7 +34,10 @@ export const useTimerInitializer = (inputSettings, context) => {
     setInitialSettings.current (inputSettings);
 
     // on exit reinitialize to input settings
-    return () => initialize.current(inputSettings);
+    return () => {
+      exit.current();
+      //initialize.current (updatedSettings); 
+    }
 
   }, [inputSettings]);  
 }

@@ -105,6 +105,12 @@ export const TimerProvider = ({ children }) => {
         }
     }
 
+    const exitTimer = () => {
+        setTimerCounting(false);
+        setToComplete(false);
+        setCurrentRound(1);
+    }
+
     // End the timer
     const completeTimer = (interval) => {
         clearInterval(interval);
@@ -179,8 +185,8 @@ export const TimerProvider = ({ children }) => {
                 counter, setCounter,
                 isFrontSide, toggleSide,
                 isComplete, setToComplete,
-                isTimerOver, startTimer, pauseTimer, resetTimer, initializeTimer,
-                completeTimer, messenger, 
+                isTimerOver, startTimer, pauseTimer, resetTimer, initializeTimer, 
+                exitTimer, completeTimer, messenger, 
                 ...settingsContext
 
             }}>
