@@ -55,7 +55,6 @@ export const TimerProvider = ({ children }) => {
 
     // Start the timer
     const startTimer = () => {
-        console.log(counter);
         setToComplete(false);
         
         // counting up
