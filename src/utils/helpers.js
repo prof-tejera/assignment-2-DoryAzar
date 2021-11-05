@@ -53,6 +53,12 @@ export const loadFromStorage = (key) => {
     }
 }
 
+// set
+export const saveToStorage  = (key, value)  => {
+    localStorage.setItem(key, JSON.stringify(value));
+}
+
+
 export const T_STOPWATCH = "Stopwatch";
 export const T_COUNTDOWN = "Countdown";
 export const T_TABATA = "Tabata";

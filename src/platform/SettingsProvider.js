@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { TIMER_SETTINGS, T_STOPWATCH } from '../utils/helpers';
+import React, { useState, useCallback } from 'react';
+import { TIMER_SETTINGS, T_STOPWATCH, saveToStorage } from '../utils/helpers';
 
 export const SettingsContext = React.createContext({});
 
@@ -22,13 +22,13 @@ export const SettingsProvider = ({ children }) => {
     }
 
     // Setter that sets all the settings in one call
-    const setSettings = (settings) =>  {
-        if (isPersistent()) localStorage.setItem(selectedTimer, JSON.stringify(settings));
+    const setSettings = useCallback((settings) =>  {
+        if (isPersistent()) saveToStorage(selectedTimer, settings);
         setStartTime(settings.startTime && isValid(settings.startTime)? parseInt(settings.startTime): 0);
         setStopTime(settings.stopTime && isValid(settings.stopTime)? parseInt(settings.stopTime): 0);
         setTotalRounds(settings.totalRounds && isValid(settings.totalRounds, "rounds")? parseInt(settings.totalRounds):  1);
         setRestStartTime(settings.restStartTime && isValid(settings.restStartTime) ? parseInt(settings.restStartTime): 0);
-    }
+    }, [selectedTimer])
 
     // Checks if input is valid based on expected configurations in timer.json
     const isValid =  (value, mode = "time") =>  value && !isNaN(value) && value <= TIMER_SETTINGS.configurations[mode].max && value >= TIMER_SETTINGS.configurations[mode].min;

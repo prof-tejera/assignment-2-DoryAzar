@@ -1,10 +1,23 @@
 # Assignment 2
 
-## Submission & Inspiration
+## Submission 
 
 [Visit Neumorphic Timers](https://prof-tejera.github.io/assignment-2-DoryAzar/)
 
+## What has been implemented
+
++ All components have been switched to functional components
++ All 4 timers are functioning properly as per our testing
++ Timers can be run successfully one after the other. The timers pause and reset at every switch of timers.
++ Application state is managed with context. All components are populate based on context.
++ We are using one logic for all timers at this stage. Each timer is its own component to allow for special operations in the future
++ Console is free of warnings and errors as per our testing
++ BONUS: Persistence has been implemented upon the SAVING
+
+##  Inspiration
+
 We decided for this design to revisit a novel and modern approach to Skeumorphism. This new trend - called Neumorphism - started in 2020 and aims to add more depth and more layering to the contemporary flat design.
+
 
 Here are some of the references that inspired this work:
 + [Neumorphism and CSS](https://css-tricks.com/neumorphism-and-css/)

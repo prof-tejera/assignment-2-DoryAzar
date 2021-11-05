@@ -22,22 +22,13 @@ export const useTimerInitializer = (inputSettings, context) => {
 
   const {setSettings, exitTimer } = context; 
 
-  const setInitialSettings = useRef();
-  setInitialSettings.current = setSettings;
-
-  const exit =  useRef();
-  exit.current = exitTimer;
-
   useEffect(() => {
     
-    // reinitialize the timer
-    setInitialSettings.current (inputSettings);
+    setSettings(inputSettings);
 
     // on exit reinitialize to input settings
-    return () => {
-      exit.current();
-      //initialize.current (updatedSettings); 
-    }
+    return () => exitTimer();
+    
 
-  }, [inputSettings]);  
+  }, [setSettings, exitTimer, inputSettings]);  
 }
