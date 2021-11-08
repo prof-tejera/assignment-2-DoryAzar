@@ -26,19 +26,19 @@ export const SettingsProvider = ({ children }) => {
 
         // Switch start and end if order not respected
         let newStartTime = settings.startTime;
-        let newStopTime = settings.stopTime;
         if ((selectedTimer === T_STOPWATCH && settings.startTime > settings.stopTime)
             || (selectedTimer === T_COUNTDOWN && settings.startTime < settings.stopTime)) {
-            newStartTime = settings.stopTime;
-            newStopTime =  settings.startTime;
+            newStartTime = settings.startTime;
+            settings.startTime = settings.stopTime;
+            settings.stopTime = newStartTime;
         } 
 
         // save if persistent is turned on
         if (isPersistent()) saveToStorage(selectedTimer, settings);
 
         // Set the settings
-        setStartTime(settings.startTime && isValid(settings.startTime)? parseInt(newStartTime): 0);
-        setStopTime(settings.stopTime && isValid(settings.stopTime)? parseInt(newStopTime): 0);
+        setStartTime(settings.startTime && isValid(settings.startTime)? parseInt(settings.startTime): 0);
+        setStopTime(settings.stopTime && isValid(settings.stopTime)? parseInt(settings.stopTime): 0);
         setTotalRounds(settings.totalRounds && isValid(settings.totalRounds, "rounds")? parseInt(settings.totalRounds):  1);
         setRestStartTime(settings.restStartTime && isValid(settings.restStartTime) ? parseInt(settings.restStartTime): 0);
     }, [selectedTimer])

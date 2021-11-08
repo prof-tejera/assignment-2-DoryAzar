@@ -1,6 +1,7 @@
 import React, { useState, useContext, useCallback } from 'react';
 import { T_STOPWATCH, T_COUNTDOWN, T_XY, T_TABATA, WORK_MODE, REST_MODE, formatTime } from '../utils/helpers';
 import { SettingsContext } from './SettingsProvider';
+
 export const TimerContext = React.createContext({});
 
 export const TimerProvider = ({ children }) => {
