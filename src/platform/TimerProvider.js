@@ -150,25 +150,26 @@ export const TimerProvider = ({ children }) => {
 
     // Conversation handler
     const messenger = () => {
-        const duration = Math.abs(startTime - stopTime);
-        const remaining =  Math.abs(counter - duration);
-        const elapsed = Math.abs((remaining - duration)/ duration);
 
+        // Use duration and elapsed time to control messaging
+        const duration = mode === WORK_MODE? Math.abs(startTime - stopTime) : Math.abs(restStartTime - stopTime) ;
+        const refTime = mode === WORK_MODE? startTime : restStartTime;
+        const elapsed = duration !== 0? Math.abs(counter-refTime)/duration : 1;
+
+        // Generic Beginning and Ending Messages
         if (mode === REST_MODE && (counter === startTime + 1 || counter === startTime - 1)) return "Breathe...";
         if (mode === WORK_MODE && (counter === startTime + 1 || counter === startTime - 1)) return "Let's move that body!";
         if (isComplete)  return "You made it! Again?";  
 
         // Breathing messages
         if (!timerCounting && counter !== startTime && counter !== stopTime ) return "Let's take a breath...";
-        if (mode === REST_MODE && duration >= 10 && elapsed < 0.2) return  "We're about to start again";
-        if (mode === REST_MODE && duration >=10 && elapsed < 0.4 ) return  "Take a deep breath";
+        if (mode === REST_MODE && duration >=5 && elapsed >= 0.8) return  "We're about to start again";
+        if (mode === REST_MODE && duration >=5 && elapsed >= 0.6 ) return  "Take a deep breath";
 
 
         // Goal reaching messages
-        if (startTime > stopTime && duration >= 10 && elapsed < 0.2 ) return "Almost There...";
-        if (startTime > stopTime && duration >=10 && elapsed < 0.4 ) return "You can do it!";
-        if (startTime < stopTime && duration >= 10 && elapsed > 0.9 ) return "Your goal is near...";
-        if (startTime < stopTime && duration >= 10 && elapsed > 0.6 ) return "Keep moving";
+        if (duration >= 10 && elapsed >= 0.8 ) return "Your goal is near...";
+        if (duration >= 10 && elapsed >= 0.6 ) return "Keep moving";
 
         // Main messages
         if (selectedTimer === T_XY) return `Round ${currentRound} of ${totalRounds}`;
