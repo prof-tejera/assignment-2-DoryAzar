@@ -164,6 +164,7 @@ export const TimerProvider = ({ children }) => {
 
         // Breathing messages
         if (!timerCounting && counter !== startTime && counter !== stopTime ) return "Let's take a breath...";
+        if (mode === REST_MODE && restRound === totalRounds && duration >=5 && elapsed >= 0.8) return  "Almost done!";
         if (mode === REST_MODE && duration >=5 && elapsed >= 0.8) return  "We're about to start again";
         if (mode === REST_MODE && duration >=5 && elapsed >= 0.6 ) return  "Take a deep breath";
 
