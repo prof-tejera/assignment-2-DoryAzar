@@ -9,10 +9,11 @@
 + All components have been switched to functional components
 + All 4 timers are functioning properly as per our testing
 + Timers can be run successfully one after the other. The timers pause and reset at every switch of timers.
-+ Application state is managed with context. All components are populate based on context.
++ Application state is managed with context. All components are populated from the context.
 + We are using one logic for all timers at this stage. Each timer is its own component to allow for special operations in the future
 + Console is free of warnings and errors as per our testing
 + BONUS: Persistence has been implemented upon the SAVING
++ Timers are initially configured based on settings coming defined in **timers.json**
 
 ##  Inspiration
 

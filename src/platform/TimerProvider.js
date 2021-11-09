@@ -106,6 +106,7 @@ export const TimerProvider = ({ children }) => {
         }
     }
 
+    // Resets all the timer controls upon  exit
     const exitTimer = useCallback(() => {
         setTimerCounting(false);
         setToComplete(false);
