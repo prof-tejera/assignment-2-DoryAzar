@@ -13,7 +13,7 @@
 + We are using one logic for all timers at this stage. Each timer is its own component to allow for special operations in the future
 + Console is free of warnings and errors as per our testing
 + BONUS: Persistence has been implemented upon the SAVING
-+ Timers are initially configured based on settings coming defined in **timers.json**
++ Timers are initially configured based on settings defined in **timers.json**
 
 ##  Inspiration
 
