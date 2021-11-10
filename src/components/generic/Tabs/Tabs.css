@@ -19,6 +19,7 @@
   .tab_control > input:checked + label {
     transition: all 0.5s ease;
     color: var(--primary);
+    font-weight: bold;
   }
   .tab_control_1, .tab_control_2, .tab_control_3, .tab_control_4 {
     width: 8rem;

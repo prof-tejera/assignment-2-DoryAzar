@@ -39,6 +39,22 @@
     font-variant: small-caps;
 }
 
+.display_circular p.header.stopwatch {
+    color: var(--primary);
+}
+
+.display_circular p.header.countdown {
+    color: var(--primary-theme-2);
+}
+
+.display_circular p.header.xy {
+    color: var(--primary-theme-3);
+}
+
+.display_circular p.header.tabata {
+    color: var(--primary-theme-4);
+}
+
 .display_circular p.header.success {
     color: var(--success);
 }
@@ -91,10 +107,49 @@
             animation-play-state: paused;
 }
 
-.neonText {
+.neonText, .neonText.stopwatch  {
     color: var(--primary);
     text-shadow:
         0 0 7px var(--primary),
+        0 0 10px var(--tint),
+        0 0 21px var(--tint),
+        0 0 42px var(--tint),
+        0 0 82px var(--tint),
+        0 0 92px var(--tint),
+        0 0 102px var(--tint),
+        0 0 151px var(--tint);
+  }
+
+  .neonText.countdown {
+    color: var(--primary-theme-2);
+    text-shadow:
+        0 0 7px var(--primary-theme-2),
+        0 0 10px var(--tint),
+        0 0 21px var(--tint),
+        0 0 42px var(--tint),
+        0 0 82px var(--tint),
+        0 0 92px var(--tint),
+        0 0 102px var(--tint),
+        0 0 151px var(--tint);
+  }
+
+  .neonText.xy {
+    color: var(--primary-theme-3);
+    text-shadow:
+        0 0 7px var(--primary-theme-3),
+        0 0 10px var(--tint),
+        0 0 21px var(--tint),
+        0 0 42px var(--tint),
+        0 0 82px var(--tint),
+        0 0 92px var(--tint),
+        0 0 102px var(--tint),
+        0 0 151px var(--tint);
+  }
+
+  .neonText.tabata {
+    color: var(--primary-theme-4);
+    text-shadow:
+        0 0 7px var(--primary-theme-4),
         0 0 10px var(--tint),
         0 0 21px var(--tint),
         0 0 42px var(--tint),

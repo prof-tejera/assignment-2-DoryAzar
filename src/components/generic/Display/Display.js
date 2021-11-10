@@ -7,9 +7,10 @@ import className from 'classnames';
 
 const Display = () => {
     const { counter, timerCounting,  statusMessage, setStatusMessage, 
-        messenger, isComplete, setCounter, startTime } = useContext(TimerContext);
+        messenger, isComplete, setCounter, startTime, selectedTimer } = useContext(TimerContext);
 
     const successStyle = [{
+        [`${selectedTimer.toLowerCase()}`]: !isComplete, 
         "success": isComplete
     }];
 

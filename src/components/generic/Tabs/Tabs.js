@@ -3,6 +3,7 @@ import { TimerContext } from '../../../platform/TimerProvider';
 import { Fragment } from 'react';
 import './Tabs.css';
 import PropTypes from 'prop-types';
+import className from 'classnames';
 
 const Tabs = ({ tabItems }) => {
 
@@ -10,6 +11,11 @@ const Tabs = ({ tabItems }) => {
     
     // select tab if included in tab list provided, otherwise select first item in tab list
     const tabSelected  = tabItems.includes(selectedTimer)? selectedTimer : tabItems[0];
+
+    // Tab style
+    const tabStyle = [{
+        [`${selectedTimer.toLowerCase()}`]: true, 
+    }];
     
     const handleChange =  (e) => {
         const value = e.target.value || tabSelected;
@@ -30,7 +36,7 @@ const Tabs = ({ tabItems }) => {
                                 onChange={handleChange}
                         />
                         <label htmlFor={"tab-" + (index + 1)} 
-                                className={"tab_control_" + (index+1)}>
+                                className={className(tabStyle, "tab_control_" + (index+1))}>
                             <p>{tabItem}</p>
                         </label>
                     </Fragment>
@@ -43,7 +49,7 @@ const Tabs = ({ tabItems }) => {
 
 
 Tabs.propTypes = {
-    tabItems: PropTypes.arrayOf(PropTypes.string)
+    tabItems: PropTypes.arrayOf(PropTypes.string).isRequired
 }
 
 export default Tabs;

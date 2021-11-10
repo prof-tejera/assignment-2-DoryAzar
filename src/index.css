@@ -10,6 +10,10 @@
 :root {
 
     --primary: #5e5ce6;
+    --primary-theme-2: #d30f45;
+    --primary-theme-3: #8944ab;
+    --primary-theme-4: #0071a4;
+    --system: #000;
     --success: #248a3e;
     --tint: #FFFFFF;
     --bgLight-1: #f2f2f7;
@@ -121,6 +125,21 @@ td {
 }
 
 .navigation li a:hover  {
-    color: var(--primary);
+    color: var(--system);
 }
 
+.stopwatch {
+    color: var(--primary) !important;
+}
+
+.countdown {
+    color: var(--primary-theme-2) !important;
+}
+
+.xy {
+    color: var(--primary-theme-3) !important;
+}
+
+.tabata {
+    color: var(--primary-theme-4) !important;
+}
