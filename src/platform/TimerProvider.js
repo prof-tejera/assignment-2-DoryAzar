@@ -25,34 +25,6 @@ export const TimerProvider = ({ children }) => {
 
     const [restRound, setRestRound] = useState(1);
 
-    // private function: start the counter
-    const startCounting =  () => {
-        switch(selectedTimer) {
-            case T_STOPWATCH:
-                setCounter((counter) => counter + 1);
-                break;
-            case T_TABATA:
-                setCounter((counter) => counter - 1);
-                if (counter === 0 && mode === REST_MODE) {
-                    setMode(WORK_MODE);
-                    setCounter(startTime);
-                    setCurrentRound(currentRound + 1);
-                } else if (counter === 0 && mode === WORK_MODE) {
-                    setMode(REST_MODE);
-                    setCounter(restStartTime);
-                    setRestRound(restRound + 1);
-                }
-                break;
-            default:
-                // /CountDown and XY have the same principles
-                setCounter((counter) => counter - 1);
-                if (counter === 0) {
-                    resetTimer(false);
-                    setCurrentRound((currentRound) => currentRound + 1);
-                }
-
-        }
-    }
 
     // Start the timer
     const startTimer = () => {
@@ -70,6 +42,35 @@ export const TimerProvider = ({ children }) => {
                 startCounting();
             }, startTime)
     }
+
+        // private function: start the counter
+        const startCounting =  () => {
+            switch(selectedTimer) {
+                case T_STOPWATCH:
+                    setCounter((counter) => counter + 1);
+                    break;
+                case T_TABATA:
+                    setCounter((counter) => counter - 1);
+                    if (counter === 0 && mode === REST_MODE) {
+                        setMode(WORK_MODE);
+                        setCounter(startTime);
+                        setCurrentRound(currentRound + 1);
+                    } else if (counter === 0 && mode === WORK_MODE) {
+                        setMode(REST_MODE);
+                        setCounter(restStartTime);
+                        setRestRound(restRound + 1);
+                    }
+                    break;
+                default:
+                    // /CountDown and XY have the same principles
+                    setCounter((counter) => counter - 1);
+                    if (counter === 0) {
+                        resetTimer(false);
+                        setCurrentRound((currentRound) => currentRound + 1);
+                    }
+    
+            }
+        }
 
     // Pause the timer
     const pauseTimer = (interval) => {
