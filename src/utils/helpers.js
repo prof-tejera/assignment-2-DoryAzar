@@ -53,12 +53,13 @@ export const loadFromStorage = (key) => {
     }
 }
 
-// set
+// Save settings to storage
 export const saveToStorage  = (key, value)  => {
     localStorage.setItem(key, JSON.stringify(value));
 }
 
 
+// Timer types
 export const T_STOPWATCH = "Stopwatch";
 export const T_COUNTDOWN = "Countdown";
 export const T_TABATA = "Tabata";
@@ -66,4 +67,5 @@ export const T_XY = "XY";
 export const WORK_MODE = "Work";
 export const REST_MODE = "Rest";
 
+// Timer settings from json
 export const TIMER_SETTINGS = timers;
