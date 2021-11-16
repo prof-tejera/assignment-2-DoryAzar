@@ -1,3 +1,35 @@
+# Assignment 2
+
+## Submission 
+
+[Visit Neumorphic Timers](https://prof-tejera.github.io/assignment-2-DoryAzar/)
+
+## What has been implemented
+
++ All components have been switched to functional components
++ All 4 timers are functioning properly as per our testing
++ Timers can be run successfully one after the other. The timers pause and reset at every switch of timers.
++ Application state is managed with context. All components are populated from the context.
++ We are using one logic for all timers at this stage. Each timer is its own component to allow for special operations in the future
++ Console is free of warnings and errors as per our testing
++ BONUS: Persistence has been implemented upon the SAVING
++ Timers are initially configured based on settings defined in **timers.json**
+
+##  Inspiration
+
+We decided for this design to revisit a novel and modern approach to Skeumorphism. This new trend - called Neumorphism - started in 2020 and aims to add more depth and more layering to the contemporary flat design.
+
+
+Here are some of the references that inspired this work:
++ [Neumorphism and CSS](https://css-tricks.com/neumorphism-and-css/)
++ [Neumorphism in CSS with just two variables](https://dev.to/aritik/neumorphism-in-css-with-just-two-variables-2p30)
++ [Neumorphism Tool](https://neumorphism.io)
++ [Neumorphism in user interfaces](https://uxdesign.cc/neumorphism-in-user-interfaces-b47cef3bf3a6)
++ [Neumorphism: why it's all the hype in UI design](https://www.justinmind.com/blog/neumorphism-ui/)
++ [Neumorphism the right way -  A 2020 Design Trend](https://artofofiare.medium.com/neumorphism-the-right-way-a-2020-design-trend-386e6a09040a)
+
+
+
 # Objective
 In this assignment, we will start using the foundation we lay in A1 and make our timers fully functional. Each timer will function as described in A1 and the user flow should be the following:
 
